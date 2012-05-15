@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon May 14 21:00:44 CEST 2012
- * XML source: /home/cdepablo/Documents/workspace-sts-2.9.1.RELEASE/rssf-ie/desc/RSSFTypeSystem.xml
+ * Updated by JCasGen Tue May 15 20:27:33 CEST 2012
+ * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
 public class MatchResult extends Annotation {
   /** @generated

@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon May 14 21:00:44 CEST 2012
+ * Updated by JCasGen Tue May 15 20:27:33 CEST 2012
  * @generated */
 public class MatchResult_Type extends Annotation_Type {
   /** @generated */

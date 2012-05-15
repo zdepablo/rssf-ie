@@ -10,8 +10,16 @@ import org.apache.uima.jcas.JCas;
 import com.seemla.rssf.MatchResult;
 
 public class MatchResultAnnotator extends JCasAnnotator_ImplBase {
+	
+	String team = "((?:[\\p{L}\\p{P}\\d]+\\s)*[\\p{L}\\p{P}\\d]+)";
+	String country = "(\\b[A-Za-z]{3}\\b)";
+	String result = "[\\*]?(\\d+-\\d+)[a-z\\*]?";
+		
+ 	private Pattern resultPattern = Pattern.compile(
+ 			team + "\\s+" + country + "\\s+" + team + "\\s+" + country + 
+ 			"\\s+" + result + "\\s+" + result + "\\s+" + result);
 
-	private Pattern resultPattern = Pattern.compile("\\b\\d+-\\d+\\b");
+
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
