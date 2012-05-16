@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="/opt/uima/apache-uima/lib/uima-core.jar"/>
 	<classpathentry kind="lib" path="/opt/uima/apache-uima/lib/uima-tools.jar"/>
 	<classpathentry kind="lib" path="/opt/uima/apache-uima/lib/uima-cpe.jar"/>
+	<classpathentry kind="lib" path="/opt/derby/db-derby-10.8.2.2-bin/lib/derby.jar"/>
+	<classpathentry kind="lib" path="/opt/derby/db-derby-10.8.2.2-bin/lib/derbyclient.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
