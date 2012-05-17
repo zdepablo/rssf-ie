@@ -267,7 +267,7 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 		
 		PreparedStatement stmt = con.prepareStatement("INSERT INTO PHASE(name,uri) VALUES (?,?)");
 		
-		stmt.setString(1, phase.getCoveredText());
+		stmt.setString(1, phase.getName());
 		stmt.setString(2, truncate(origin, MAX_URI_LENGTH));
 		
 		return stmt;

@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed May 16 13:18:25 CEST 2012
+ * Updated by JCasGen Thu May 17 10:22:16 CEST 2012
  * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
 public class Phase extends Annotation {
@@ -60,6 +60,22 @@ public class Phase extends Annotation {
   @generated modifiable */
   private void readObject() {/*default - does nothing empty block */}
      
-}
+  //*--------------*
+  //* Feature: name
+
+  /** getter for name - gets 
+   * @generated */
+  public String getName() {
+    if (Phase_Type.featOkTst && ((Phase_Type)jcasType).casFeat_name == null)
+      jcasType.jcas.throwFeatMissing("name", "com.seemla.rssf.Phase");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Phase_Type)jcasType).casFeatCode_name);}
+    
+  /** setter for name - sets  
+   * @generated */
+  public void setName(String v) {
+    if (Phase_Type.featOkTst && ((Phase_Type)jcasType).casFeat_name == null)
+      jcasType.jcas.throwFeatMissing("name", "com.seemla.rssf.Phase");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Phase_Type)jcasType).casFeatCode_name, v);}    
+  }
 
     

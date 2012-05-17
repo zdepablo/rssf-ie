@@ -7,6 +7,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 
 import com.seemla.rssf.Competition;
 
@@ -19,6 +20,8 @@ import com.seemla.rssf.Competition;
  *
  */
 public class CompetitionAnnotator extends JCasAnnotator_ImplBase{
+	
+	
 	
 	// List of competition names - extend to detect additional ones
 	// It is a regexp group
@@ -46,32 +49,71 @@ public class CompetitionAnnotator extends JCasAnnotator_ImplBase{
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		
+		Logger logger = getContext().getLogger();
+		
 		String docText = aJCas.getDocumentText();
+		int length = docText.length();
 		
 		Matcher matcher = competitionPattern.matcher(docText);
 		
 		int pos = 0;
-		while (matcher.find(pos)) {
+		
+		// The annotation works more like a zoning 
+		// The beginning of an annotation is marked by a match 
+		// The end of the annotation is marked by the beginning 
+		// of the following match or the end of the document
+		if (matcher.find(pos)) {
+
+			Competition previousAnnotation = new Competition(aJCas);
 			
-			Competition annotation = new Competition(aJCas);
-			annotation.setBegin(matcher.start());
-			annotation.setEnd(matcher.end());
-			
-			int n = matcher.groupCount();
-			
-			if (n == 2) {
-				annotation.setName(matcher.group(1));
-				annotation.setYear(matcher.group(2));				
-			} else {
-				getContext().getLogger().log(Level.INFO, "Groups found: " + n + " in " + matcher.group() );
-			}
-			
-			
-			annotation.addToIndexes();
+			previousAnnotation.setBegin(matcher.start());
+			fillCompetition(previousAnnotation, matcher);
 			
 			pos = matcher.end();
+
+			while (matcher.find(pos)) {			
+				
+				previousAnnotation.setEnd(matcher.start() -1 );
+				previousAnnotation.addToIndexes();
+				logger.log(Level.FINER, "Competition " + previousAnnotation);	
+				
+				Competition annotation = new Competition(aJCas);
+				annotation.setBegin(matcher.start());
+				fillCompetition(annotation, matcher);	
+				
+				previousAnnotation = annotation;
+				pos = matcher.end();
+			}
+			
+			previousAnnotation.setEnd(length);
+			previousAnnotation.addToIndexes();
+			logger.log(Level.FINER, "Competition " + previousAnnotation);
 		}
+		
+		
 
 	}
 
+	/**
+	 * Helper method to fill a Competition with the information 
+	 * of a regular expression match 
+	 * 
+	 * @param annotation
+	 * 			the competition annotation to fill  
+	 * @param matcher
+	 * 			a matcher that include the text  
+	 */
+	private void fillCompetition(Competition annotation, Matcher matcher) {
+		
+		int n = matcher.groupCount();
+		
+		if (n == 2) {
+			annotation.setName(matcher.group(1));
+			annotation.setYear(matcher.group(2));				
+		} else {
+			getContext().getLogger().log(Level.INFO, "Groups found: " + n + " in " + matcher.group() );
+		}
+
+	}
+	
 }

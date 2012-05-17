@@ -9,10 +9,12 @@ import org.apache.uima.cas.impl.FSGenerator;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.impl.FeatureImpl;
+import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed May 16 13:18:26 CEST 2012
+ * Updated by JCasGen Thu May 17 10:22:16 CEST 2012
  * @generated */
 public class Phase_Type extends Annotation_Type {
   /** @generated */
@@ -44,11 +46,35 @@ public class Phase_Type extends Annotation_Type {
 
 
 
+  /** @generated */
+  final Feature casFeat_name;
+  /** @generated */
+  final int     casFeatCode_name;
+  /** @generated */ 
+  public String getName(int addr) {
+        if (featOkTst && casFeat_name == null)
+      jcas.throwFeatMissing("name", "com.seemla.rssf.Phase");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_name);
+  }
+  /** @generated */    
+  public void setName(int addr, String v) {
+        if (featOkTst && casFeat_name == null)
+      jcas.throwFeatMissing("name", "com.seemla.rssf.Phase");
+    ll_cas.ll_setStringValue(addr, casFeatCode_name, v);}
+    
+  
+
+
+
   /** initialize variables to correspond with Cas Type and Features
 	* @generated */
   public Phase_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
+
+ 
+    casFeat_name = jcas.getRequiredFeatureDE(casType, "name", "uima.cas.String", featOkTst);
+    casFeatCode_name  = (null == casFeat_name) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_name).getCode();
 
   }
 }
