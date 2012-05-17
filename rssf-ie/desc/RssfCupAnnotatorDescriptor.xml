@@ -6,18 +6,21 @@
     <delegateAnalysisEngine key="CompetitionAnnotatorDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/CompetitionAnnotatorDescriptor.xml"/>
     </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="MatchResultDescriptor">
-      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchResultDescriptor.xml"/>
+    <delegateAnalysisEngine key="QualifyingResultDBConsumerDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/QualifyingResultDBConsumerDescriptor.xml"/>
     </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="MatchResultDBConsumerDescriptor">
-      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchResultDBConsumerDescriptor.xml"/>
+    <delegateAnalysisEngine key="QualifyingResultAnnotatorDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/QualifyingResultAnnotatorDescriptor.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="MatchResultAnnotatorDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchResultAnnotatorDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="PhaseAnnotatorDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/PhaseAnnotatorDescriptor.xml"/>
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
-    <name>aeDescriptor</name>
+    <name>RssfCupAnnotatorDescriptor</name>
     <description/>
     <version>1.0</version>
     <vendor/>
@@ -27,18 +30,18 @@
       <fixedFlow>
         <node>CompetitionAnnotatorDescriptor</node>
         <node>PhaseAnnotatorDescriptor</node>
-        <node>MatchResultDescriptor</node>
-        <node>MatchResultDBConsumerDescriptor</node>
+        <node>MatchResultAnnotatorDescriptor</node>
+        <node>QualifyingResultAnnotatorDescriptor</node>
+        <node>QualifyingResultDBConsumerDescriptor</node>
       </fixedFlow>
     </flowConstraints>
+    <typePriorities/>
     <fsIndexCollection/>
     <capabilities>
       <capability>
         <inputs/>
         <outputs>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.Phase</type>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.MatchResult</type>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.Competition</type>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.QualifyingResult</type>
         </outputs>
         <languagesSupported/>
       </capability>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>com.seemla.rssf.annotators.QualifyingResultAnnotator</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>QualifyingResultAnnotatorDescriptor</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters/>
+    <configurationParameterSettings/>
+    <typeSystemDescription>
+      <imports>
+        <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.Phase</type>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.MatchResult</type>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.Competition</type>
+        </inputs>
+        <outputs>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.QualifyingResult</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>

@@ -91,5 +91,27 @@
         </featureDescription>
       </features>
     </typeDescription>
+    <typeDescription>
+      <name>com.seemla.rssf.QualifyingResult</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>result</name>
+          <description/>
+          <rangeTypeName>com.seemla.rssf.MatchResult</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>competition</name>
+          <description/>
+          <rangeTypeName>com.seemla.rssf.Competition</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>phase</name>
+          <description/>
+          <rangeTypeName>com.seemla.rssf.Phase</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>
