@@ -20,7 +20,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
+import com.seemla.rssf.Competition;
 import com.seemla.rssf.MatchResult;
+import com.seemla.rssf.Phase;
 
 /**
  * A simple CAS consumer that creates a Derby database in the file system 
@@ -61,11 +63,8 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	
 	public static final int MAX_TEAM_LENGTH = 50;
 	
-	public static final int DB_LOAD_BATCH_SIZE = 50;
-	
 	private File mOutputDir;
 	
-	private int batchCounter = DB_LOAD_BATCH_SIZE;
 	
 	private boolean firstCall = true;
 	
@@ -119,21 +118,7 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 				if (firstEverCall) {
 					firstEverCall = false;
 					System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Doing first process call ever (even during re-runs) initialization");
-
-					try {
-						Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-						System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Loaded Derby driver Ok");
-					} catch (InstantiationException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						System.err.println("No driver found for derby - check class path");
-						e.printStackTrace();
-					}
-
+					loadDriver();	
 				}
 
 				// Create and connect to the database RssfResultsDB
@@ -147,60 +132,13 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 				con = DriverManager.getConnection("jdbc:derby:RssfResultsDB;create=true");
 		        System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: First Time Initialization: Created the RssfResultsDB and connected to it.");
 		        
-		        Statement sqlStatement = con.createStatement();
-		        try {
-		        	sqlStatement.execute("DROP TABLE MATCH_PAIR");
-		        	System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: First Time Initialization: Delete table");
-		        } catch (SQLException e) {
-				}
+		        createDatabase();
 		        
-		        String MATCH_PAIR_CREATE = "CREATE TABLE MATCH_PAIR (" +
-		        		"team1 varchar(" + MAX_TEAM_LENGTH +")," +
-		        		"team2 varchar(" + MAX_TEAM_LENGTH +")," +
-		        		"leg1_1 int," +
-		        		"leg1_2 int," +
-		        		"leg2_1 int," +
-		        		"leg2_2 int," +
-		        		"uri varchar(" + MAX_URI_LENGTH +")" +
-		        		")";
-		        
-		        sqlStatement.execute(MATCH_PAIR_CREATE);
-		        System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: First Time Initiailization: Created the MATCH_PAIR table");
-		        sqlStatement.close();
-		        
-		        stmt = con.prepareStatement("INSERT INTO MATCH_PAIR VALUES (?,?,?,?,?,?,?)");
-		        con.setAutoCommit(false);
+		        // con.setAutoCommit(false);
 
 			}
 			
-			SourceDocumentInformation sdi = (SourceDocumentInformation) jcas.getAnnotationIndex(SourceDocumentInformation.type).iterator().next();
-			
-     	    System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Processing doc: '" + sdi.getUri() + "'");
-
-     	    stmt.setString(7, truncate(sdi.getUri(), MAX_URI_LENGTH));
-     	    
-     	    
-     	    for (FSIterator iter = jcas.getAnnotationIndex(MatchResult.type).iterator(); iter.hasNext();) {
-     	    	MatchResult r = (MatchResult) iter.next();
-     	    	stmt.setString(1, truncate(r.getTeam1(), MAX_TEAM_LENGTH));
-     	    	stmt.setString(2, truncate(r.getTeam2(), MAX_TEAM_LENGTH));
-     	    	stmt.setInt(3, r.getLeg1_1());
-     	    	stmt.setInt(4, r.getLeg1_2());
-     	    	stmt.setInt(5, r.getLeg2_1());
-     	    	stmt.setInt(6, r.getLeg2_2());
-     	    	stmt.addBatch();
-     	    	batchCounter--;
-     	    	
-     	    	if (batchCounter <= 0) {
-     	           System.out.println("Time: " + (System.currentTimeMillis() - startTime)
-     	                  + " DB Writer: Batch writing updates - process call");
-     	           stmt.executeBatch();
-     	           
-     	           con.commit();
-     	           batchCounter = DB_LOAD_BATCH_SIZE;
-     	    	}
-     	    	
-     	    }
+			saveAnnotations(jcas);
 			
 			
 		} catch (SQLException e) {
@@ -233,16 +171,7 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	public void collectionProcessComplete(ProcessTrace arg0) throws ResourceProcessException, IOException {
 		firstCall = true;
 		
-		try {
-			if (batchCounter < DB_LOAD_BATCH_SIZE) {
-				System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Batch writing updates - processComplete call");
-				stmt.executeBatch();
-				con.commit();
-				batchCounter = DB_LOAD_BATCH_SIZE;
-
-			}
-			
-			stmt.close();
+		try {			
 			con.close();
 			
     	    System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Sucessfully closed the connection - done.");
@@ -269,6 +198,147 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	}
 
 
+	private void loadDriver() {
+		try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+			System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Loaded Derby driver Ok");
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.err.println("No driver found for derby - check class path");
+			e.printStackTrace();
+		}
+
+		
+	}
+
+	
+	private void saveAnnotations(JCas jcas) throws SQLException {
+		
+		SourceDocumentInformation sdi = (SourceDocumentInformation) jcas.getAnnotationIndex(SourceDocumentInformation.type).iterator().next();
+		
+ 	    System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: Processing doc: '" + sdi.getUri() + "'");
+ 	    
+ 	    for (FSIterator CompetitionIter = jcas.getAnnotationIndex(Competition.type).iterator(); CompetitionIter.hasNext();) {
+ 	    	Competition competition = (Competition) CompetitionIter.next();
+ 	    	
+ 	    	PreparedStatement stmt = mapCompetition(competition, sdi.getUri());
+ 	    	stmt.executeUpdate();		
+ 	    	
+ 	    }
+
+ 	    
+ 	    for (FSIterator PhaseIter = jcas.getAnnotationIndex(Phase.type).iterator(); PhaseIter.hasNext();) {
+ 	    	Phase phase = (Phase) PhaseIter.next();
+ 	    	
+ 	    	PreparedStatement stmt = mapPhase(phase, sdi.getUri());
+ 	    	stmt.executeUpdate();		
+ 	    	
+ 	    }
+
+ 	    
+ 	   
+ 	    for (FSIterator MatchResultIter = jcas.getAnnotationIndex(MatchResult.type).iterator(); MatchResultIter.hasNext();) {
+ 	    	MatchResult matchResult = (MatchResult) MatchResultIter.next();
+ 	    	
+ 	    	PreparedStatement stmt = mapMatchResult(matchResult, sdi.getUri());
+ 	    	stmt.executeUpdate();
+ 	           
+ 	    	
+ 	    }
+	}
+	
+	private PreparedStatement mapCompetition(Competition competition, String origin) throws SQLException {
+		
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO COMPETITION(name,season,uri) VALUES (?,?,?)");
+		
+		stmt.setString(1, competition.getName());
+		stmt.setString(2, competition.getYear());
+		stmt.setString(3, truncate(origin, MAX_URI_LENGTH));
+		
+		return stmt;
+	}
+
+	private PreparedStatement mapPhase(Phase phase, String origin) throws SQLException {
+		
+		PreparedStatement stmt = con.prepareStatement("INSERT INTO PHASE(name,uri) VALUES (?,?)");
+		
+		stmt.setString(1, phase.getCoveredText());
+		stmt.setString(2, truncate(origin, MAX_URI_LENGTH));
+		
+		return stmt;
+	}
+
+
+	private PreparedStatement mapMatchResult( MatchResult matchResult, String origin) throws SQLException {
+		
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO MATCH_PAIR VALUES (?,?,?,?,?,?,?)");
+		
+	    	stmt.setString(1, truncate(matchResult.getTeam1(), MAX_TEAM_LENGTH));
+	    	stmt.setString(2, truncate(matchResult.getTeam2(), MAX_TEAM_LENGTH));
+	    	stmt.setInt(3, matchResult.getLeg1_1());
+	    	stmt.setInt(4, matchResult.getLeg1_2());
+	    	stmt.setInt(5, matchResult.getLeg2_1());
+	    	stmt.setInt(6, matchResult.getLeg2_2());
+	    	stmt.setString(7, truncate(origin, MAX_URI_LENGTH));
+	    	
+	    	return stmt;
+	    	 	
+	}
+	
+	
+	
+	private void createDatabase() throws SQLException {
+		
+        Statement sqlStatement = con.createStatement();
+        try {
+        	sqlStatement.execute("DROP TABLE MATCH_PAIR");
+        	sqlStatement.execute("DROP TABLE COMPETITION");
+        	sqlStatement.execute("DROP TABLE PHASE");
+        	System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: First Time Initialization: Delete table");
+        } catch (SQLException e) {
+		}
+        
+        String MATCH_PAIR_CREATE = "CREATE TABLE MATCH_PAIR (" +
+        		"team1 varchar(" + MAX_TEAM_LENGTH +")," +
+        		"team2 varchar(" + MAX_TEAM_LENGTH +")," +
+        		"leg1_1 int," +
+        		"leg1_2 int," +
+        		"leg2_1 int," +
+        		"leg2_2 int," +
+        		"uri varchar(" + MAX_URI_LENGTH +")" +
+        		")";
+        
+        sqlStatement.execute(MATCH_PAIR_CREATE);
+        
+        String COMPETITION_CREATE = "CREATE TABLE COMPETITION (" +
+        		"id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
+        		"name VARCHAR(50), " +
+        		"season VARCHAR(10)," +
+        		"uri varchar(" + MAX_URI_LENGTH +")," +
+        		"CONSTRAINT competition_pk PRIMARY KEY (id)" +
+        		")";
+        
+        sqlStatement.execute(COMPETITION_CREATE);
+        
+        String PHASE_CREATE = "CREATE TABLE PHASE (" +
+        		"id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
+        		"name VARCHAR(50), " +
+        		"uri varchar(" + MAX_URI_LENGTH +")," +
+        		"CONSTRAINT phase_pk PRIMARY KEY (id)" +
+        		")";
+       
+        sqlStatement.execute(PHASE_CREATE);
+        
+        System.out.println("Time: " + (System.currentTimeMillis() - startTime) + " DB Writer: First Time Initiailization: Created the MATCH_PAIR table");
+        sqlStatement.close();
+
+		
+	}
 
 	private void deleteDir(File f) {
 		if (f.isDirectory()) {
