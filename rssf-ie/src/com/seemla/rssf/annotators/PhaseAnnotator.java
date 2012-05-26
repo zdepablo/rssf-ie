@@ -24,12 +24,13 @@ public class PhaseAnnotator extends JCasAnnotator_ImplBase {
 	// Some reusable keywords. all should be non capturing groups 
 	private static final String PHASE = "(?:Phase|Round)";
 	private static final String ORDINAL = "(?:First|Second|Third|1st|2nd|3rd|Intermediate|Preliminary)";
+	private static final String QUALIFY = "(?:Qualifying|Qualification)";
 	
 	// A number of names for phases used in different competitions
 	
 	// Qualifying Phase 1 | First Qualifying Phase 
 	private static final String QUALIFYING_PHASE = 
-			"(?:Qualifying\\s+" + PHASE + "\\s+\\d|" + ORDINAL + "\\s+Qualifying\\s+" + PHASE +")";
+			"(?:" + QUALIFY + "\\s+" + PHASE + "(?:\\s+\\d)?|" + ORDINAL + "\\s+" + QUALIFY + "\\s+" + PHASE +")";
 	// Group Phase | Group Phase 1 
 	private static final String GROUP_PHASE = "Group\\s+" + PHASE + "(?:\\s+\\d)?";
 	
