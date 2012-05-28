@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu May 17 12:22:54 CEST 2012
+ * Updated by JCasGen Mon May 28 19:36:37 CEST 2012
  * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
 public class Phase extends Annotation {

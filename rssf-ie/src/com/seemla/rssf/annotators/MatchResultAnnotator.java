@@ -29,19 +29,22 @@ public class MatchResultAnnotator extends JCasAnnotator_ImplBase {
 	 
 	
 	// A pattern that match the name of a team ( or almos t anything) that contains characters, puntuactions and digits 
-	private static final String team = "((?:[\\p{L}\\p{P}\\d]+\\s)*[\\p{L}\\p{P}\\d]+)";
+	private static final String team = "((?:[\\p{L}\\p{P}\\d+]+\\s)*[\\p{L}\\p{P}\\d]+?)";
 	
 	// A pattern that match country abbreviations as are used in RSSF: three characters 
-	private static final String country = "(\\b[A-Za-z]{3}\\b)";
+	private static final String country = "([A-Za-z]{3}+)";
 	
 	// A pattern to capture match results as given in the gualifyinng, a number of digits separated by a dash 
 	// Results usually have annotations 
 	private static final String result = "[\\*]?(\\d+)-(\\d+)[a-z\\*]?";
-		
- 	private Pattern resultPattern = Pattern.compile(
+	
+	private static final String cleanteam = "\\p{L}[\\p{L}\\d\\s;&-]+";
+	
+ 	private static Pattern resultPattern = Pattern.compile(
  			team + "\\s+" + country + "\\s+" + team + "\\s+" + country + 
  			"\\s+" + result + "\\s+" + result + "\\s+" + result);
 
+ 	private static Pattern cleanTeamPattern  = Pattern.compile(cleanteam);
 
 	
 	@Override
@@ -63,10 +66,10 @@ public class MatchResultAnnotator extends JCasAnnotator_ImplBase {
 			
 			if (n == 10 ) {
 				
-				annotation.setTeam1(matcher.group(1));
+				annotation.setTeam1(cleanTeamname(matcher.group(1)));
 				annotation.setCountry1(matcher.group(2));
 				
-				annotation.setTeam2(matcher.group(3));
+				annotation.setTeam2(cleanTeamname(matcher.group(3)));
 				annotation.setCountry2(matcher.group(4));
 				
 				try {
@@ -96,4 +99,14 @@ public class MatchResultAnnotator extends JCasAnnotator_ImplBase {
 
 	}
 
+	private String cleanTeamname(String s) {
+		Matcher m = cleanTeamPattern.matcher(s);
+		
+		if (m.find()) {
+			return m.group();
+		} 
+		
+		return s;
+	}
+	
 }

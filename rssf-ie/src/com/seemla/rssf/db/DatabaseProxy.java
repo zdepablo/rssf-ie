@@ -19,7 +19,7 @@ public class DatabaseProxy {
 	public static final int MAX_URI_LENGTH = 80;
 	
 	public static final int MAX_COMPETITION_LENGTH = 50;
-	public static final int MAX_YEAR_LENGTH = 10;
+	public static final int MAX_SEASON_LENGTH = 10;
 	public static final int MAX_PHASE_LENGTH = 50;
 	
 	public static final int MAX_TEAM_LENGTH = 50;
@@ -140,6 +140,7 @@ public class DatabaseProxy {
         		"id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
         		"name VARCHAR(50), " +
         		"season VARCHAR(10), " +
+        		"start INTEGER, " +
         		"uri VARCHAR(80), " +
         		"CONSTRAINT competition_pk PRIMARY KEY (id)" +
         		")";
@@ -147,6 +148,7 @@ public class DatabaseProxy {
         String PHASE_CREATE = "CREATE TABLE PHASE (" +
         		"competition INTEGER NOT NULL," +
         		"name VARCHAR(50) NOT NULL," +
+        		"numToFinal INTEGER," +
         		"uri VARCHAR(80)," +
         		"CONSTRAINT phase_pk PRIMARY KEY (competition,name)," +
         		"CONSTRAINT phase_fk FOREIGN KEY (competition) REFERENCES COMPETITION(id)" +
@@ -221,13 +223,14 @@ public class DatabaseProxy {
 		return id ;
 	}
 	
-	public boolean insertCompetition(String name, String year, String origin) throws SQLException {
+	public boolean insertCompetition(String name, String season, Integer start, String origin) throws SQLException {
 		
-		String insert = "INSERT INTO COMPETITION (name,season,uri) VALUES (?,?,?)";
+		String insert = "INSERT INTO COMPETITION (name,season,start,uri) VALUES (?,?,?,?)";
 		PreparedStatement stmt = con.prepareStatement(insert);
 		stmt.setString(1, truncate(name,MAX_COMPETITION_LENGTH));
-		stmt.setString(2, truncate(year,MAX_YEAR_LENGTH));
-		stmt.setString(3, truncate(origin, MAX_URI_LENGTH));
+		stmt.setString(2, truncate(season,MAX_SEASON_LENGTH));
+		stmt.setInt(3, start);
+		stmt.setString(4, truncate(origin, MAX_URI_LENGTH));
 		
 		stmt.execute();
 		
@@ -401,7 +404,7 @@ public class DatabaseProxy {
 			db.createDatabase();
 			
 			
-			db.insertCompetition("Champion's Cup", "1995-96", "" );
+			db.insertCompetition("Champion's Cup", "1995-96",1995, "" );
 			Integer competitionId = db.findCompetition("Champion's Cup", "1995-96");
 			
 			db.insertPhase(competitionId, "Semi-Finals", "");

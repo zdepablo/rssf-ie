@@ -37,14 +37,17 @@ public class CompetitionAnnotator extends JCasAnnotator_ImplBase{
 			")";
 
 	
-	// A string to build a pattern for season years: Eg. 2009-2010 or simply 2010
+	// A string to build a pattern for season years: Eg. 2009-10, 2009-2010 or simply 2010
 	// It is a regexp group
-	private static final String season = "((?:\\d{4}-\\d{2})|\\d{4})";
+	private static final String season = "((?:\\d{4}(?:-|/)\\d{4})|(?:\\d{4}(?:-|/)\\d{2})|\\d{4})";
 	
 	// Matches competition names like: UEFA Champions League 2009-10
 	// First group: competition name 
 	// Second group: season year 
-	private Pattern competitionPattern = Pattern.compile(competition + "\\s+" + season );
+	private static Pattern competitionPattern = Pattern.compile(competition + "\\s+" + season );
+	
+	// Matches the year start inside a season 
+	private static Pattern startPattern = Pattern.compile("\\d{4}");
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -109,7 +112,19 @@ public class CompetitionAnnotator extends JCasAnnotator_ImplBase{
 		
 		if (n == 2) {
 			annotation.setName(matcher.group(1));
-			annotation.setYear(matcher.group(2));				
+			String season = matcher.group(2);
+			annotation.setSeason(season);
+			
+			// Add a numeric start of the season
+			Matcher m = startPattern.matcher(season);
+			if (m.find()) {
+				try {
+				Integer start = Integer.valueOf(m.group());					
+				annotation.setStart(start);
+				} catch (NumberFormatException e) {
+					getContext().getLogger().log(Level.INFO, "exception transforming competition start year: " + season);
+				}
+			}
 		} else {
 			getContext().getLogger().log(Level.INFO, "Groups found: " + n + " in " + matcher.group() );
 		}

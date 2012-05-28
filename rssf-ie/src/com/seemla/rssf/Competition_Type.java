@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu May 17 12:22:54 CEST 2012
+ * Updated by JCasGen Mon May 28 19:36:37 CEST 2012
  * @generated */
 public class Competition_Type extends Annotation_Type {
   /** @generated */
@@ -63,20 +63,38 @@ public class Competition_Type extends Annotation_Type {
   
  
   /** @generated */
-  final Feature casFeat_year;
+  final Feature casFeat_season;
   /** @generated */
-  final int     casFeatCode_year;
+  final int     casFeatCode_season;
   /** @generated */ 
-  public String getYear(int addr) {
-        if (featOkTst && casFeat_year == null)
-      jcas.throwFeatMissing("year", "com.seemla.rssf.Competition");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_year);
+  public String getSeason(int addr) {
+        if (featOkTst && casFeat_season == null)
+      jcas.throwFeatMissing("season", "com.seemla.rssf.Competition");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_season);
   }
   /** @generated */    
-  public void setYear(int addr, String v) {
-        if (featOkTst && casFeat_year == null)
-      jcas.throwFeatMissing("year", "com.seemla.rssf.Competition");
-    ll_cas.ll_setStringValue(addr, casFeatCode_year, v);}
+  public void setSeason(int addr, String v) {
+        if (featOkTst && casFeat_season == null)
+      jcas.throwFeatMissing("season", "com.seemla.rssf.Competition");
+    ll_cas.ll_setStringValue(addr, casFeatCode_season, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_start;
+  /** @generated */
+  final int     casFeatCode_start;
+  /** @generated */ 
+  public int getStart(int addr) {
+        if (featOkTst && casFeat_start == null)
+      jcas.throwFeatMissing("start", "com.seemla.rssf.Competition");
+    return ll_cas.ll_getIntValue(addr, casFeatCode_start);
+  }
+  /** @generated */    
+  public void setStart(int addr, int v) {
+        if (featOkTst && casFeat_start == null)
+      jcas.throwFeatMissing("start", "com.seemla.rssf.Competition");
+    ll_cas.ll_setIntValue(addr, casFeatCode_start, v);}
     
   
 
@@ -93,8 +111,12 @@ public class Competition_Type extends Annotation_Type {
     casFeatCode_name  = (null == casFeat_name) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_name).getCode();
 
  
-    casFeat_year = jcas.getRequiredFeatureDE(casType, "year", "uima.cas.String", featOkTst);
-    casFeatCode_year  = (null == casFeat_year) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_year).getCode();
+    casFeat_season = jcas.getRequiredFeatureDE(casType, "season", "uima.cas.String", featOkTst);
+    casFeatCode_season  = (null == casFeat_season) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_season).getCode();
+
+ 
+    casFeat_start = jcas.getRequiredFeatureDE(casType, "start", "uima.cas.Integer", featOkTst);
+    casFeatCode_start  = (null == casFeat_start) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_start).getCode();
 
   }
 }

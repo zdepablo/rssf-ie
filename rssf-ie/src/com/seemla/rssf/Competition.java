@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu May 17 12:22:54 CEST 2012
+ * Updated by JCasGen Mon May 28 19:36:37 CEST 2012
  * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
 public class Competition extends Annotation {
@@ -81,21 +81,39 @@ public class Competition extends Annotation {
    
     
   //*--------------*
-  //* Feature: year
+  //* Feature: season
 
-  /** getter for year - gets 
+  /** getter for season - gets 
    * @generated */
-  public String getYear() {
-    if (Competition_Type.featOkTst && ((Competition_Type)jcasType).casFeat_year == null)
-      jcasType.jcas.throwFeatMissing("year", "com.seemla.rssf.Competition");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Competition_Type)jcasType).casFeatCode_year);}
+  public String getSeason() {
+    if (Competition_Type.featOkTst && ((Competition_Type)jcasType).casFeat_season == null)
+      jcasType.jcas.throwFeatMissing("season", "com.seemla.rssf.Competition");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Competition_Type)jcasType).casFeatCode_season);}
     
-  /** setter for year - sets  
+  /** setter for season - sets  
    * @generated */
-  public void setYear(String v) {
-    if (Competition_Type.featOkTst && ((Competition_Type)jcasType).casFeat_year == null)
-      jcasType.jcas.throwFeatMissing("year", "com.seemla.rssf.Competition");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Competition_Type)jcasType).casFeatCode_year, v);}    
+  public void setSeason(String v) {
+    if (Competition_Type.featOkTst && ((Competition_Type)jcasType).casFeat_season == null)
+      jcasType.jcas.throwFeatMissing("season", "com.seemla.rssf.Competition");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Competition_Type)jcasType).casFeatCode_season, v);}    
+   
+    
+  //*--------------*
+  //* Feature: start
+
+  /** getter for start - gets 
+   * @generated */
+  public int getStart() {
+    if (Competition_Type.featOkTst && ((Competition_Type)jcasType).casFeat_start == null)
+      jcasType.jcas.throwFeatMissing("start", "com.seemla.rssf.Competition");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((Competition_Type)jcasType).casFeatCode_start);}
+    
+  /** setter for start - sets  
+   * @generated */
+  public void setStart(int v) {
+    if (Competition_Type.featOkTst && ((Competition_Type)jcasType).casFeat_start == null)
+      jcasType.jcas.throwFeatMissing("start", "com.seemla.rssf.Competition");
+    jcasType.ll_cas.ll_setIntValue(addr, ((Competition_Type)jcasType).casFeatCode_start, v);}    
   }
 
     

@@ -117,10 +117,10 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	 	    	
 	 	    	// Insert competition if does not exist 
 	 	    	Competition c = q.getCompetition();
-	 	    	Integer competitionId = db.findCompetition(c.getName(), c.getYear());
+	 	    	Integer competitionId = db.findCompetition(c.getName(), c.getSeason());
 	 	    	if (competitionId == null) {
-	 	    		db.insertCompetition(c.getName(), c.getYear(), sdi.getUri());
-	 	    		competitionId = db.findCompetition(c.getName(), c.getYear());
+	 	    		db.insertCompetition(c.getName(), c.getSeason(), c.getStart(), sdi.getUri());
+	 	    		competitionId = db.findCompetition(c.getName(), c.getSeason());
 	 	    	}
 	 	    	
 	 	    	// Insert phase if does not exist 

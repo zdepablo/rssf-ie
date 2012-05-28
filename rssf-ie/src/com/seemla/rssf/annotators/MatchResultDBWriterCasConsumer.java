@@ -257,7 +257,7 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 		PreparedStatement stmt = con.prepareStatement("INSERT INTO COMPETITION(name,season,uri) VALUES (?,?,?)");
 		
 		stmt.setString(1, competition.getName());
-		stmt.setString(2, competition.getYear());
+		stmt.setString(2, competition.getSeason());
 		stmt.setString(3, truncate(origin, MAX_URI_LENGTH));
 		
 		return stmt;
