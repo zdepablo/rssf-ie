@@ -9,7 +9,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 
-import com.seemla.rssf.MatchResult;
 import com.seemla.rssf.Phase;
 
 /**

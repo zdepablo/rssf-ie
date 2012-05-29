@@ -2,9 +2,9 @@
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>true</primitive>
-  <annotatorImplementationName>com.seemla.rssf.annotators.MatchResultAnnotator</annotatorImplementationName>
+  <annotatorImplementationName>com.seemla.rssf.annotators.MatchPairResultAnnotator</annotatorImplementationName>
   <analysisEngineMetaData>
-    <name>MatchResultDescriptor</name>
+    <name>MatchPairResultDescriptor</name>
     <description/>
     <version>1.0</version>
     <vendor/>

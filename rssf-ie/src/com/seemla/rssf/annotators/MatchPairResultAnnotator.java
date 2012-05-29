@@ -8,7 +8,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
 
-import com.seemla.rssf.MatchResult;
+import com.seemla.rssf.MatchPairResult;;
 
 /**
  * An annotator for match results for qualifying rounds 
@@ -25,7 +25,7 @@ import com.seemla.rssf.MatchResult;
  * @author cdepablo
  *
  */
-public class MatchResultAnnotator extends JCasAnnotator_ImplBase {
+public class MatchPairResultAnnotator extends JCasAnnotator_ImplBase {
 	 
 	
 	// A pattern that match the name of a team ( or almos t anything) that contains characters, puntuactions and digits 
@@ -58,7 +58,7 @@ public class MatchResultAnnotator extends JCasAnnotator_ImplBase {
 		int pos = 0;
 		while (matcher.find(pos)) {
 			
-			MatchResult annotation = new MatchResult(aJCas);
+			MatchPairResult annotation = new MatchPairResult(aJCas);
 			annotation.setBegin(matcher.start());
 			annotation.setEnd(matcher.end());
 			

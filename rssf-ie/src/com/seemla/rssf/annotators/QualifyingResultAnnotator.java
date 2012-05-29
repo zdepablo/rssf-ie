@@ -11,7 +11,7 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 
 import com.seemla.rssf.Competition;
-import com.seemla.rssf.MatchResult;
+import com.seemla.rssf.MatchPairResult;
 import com.seemla.rssf.Phase;
 import com.seemla.rssf.QualifyingResult;
 
@@ -22,10 +22,10 @@ public class QualifyingResultAnnotator extends JCasAnnotator_ImplBase {
 		
 		Logger logger = getContext().getLogger(); 
 		
-		FSIterator MatchResultIter = aJCas.getAnnotationIndex(MatchResult.type).iterator();		
-		while (MatchResultIter.hasNext()) {
+		FSIterator matchPairResultIter = aJCas.getAnnotationIndex(MatchPairResult.type).iterator();		
+		while (matchPairResultIter.hasNext()) {
 			
-			MatchResult matchResult = (MatchResult) MatchResultIter.next();
+			MatchPairResult matchResult = (MatchPairResult) matchPairResultIter.next();
 			Annotation competition = findParent(aJCas, Competition.type, matchResult);
 			Annotation phase = findParent(aJCas, Phase.type, matchResult);
 			

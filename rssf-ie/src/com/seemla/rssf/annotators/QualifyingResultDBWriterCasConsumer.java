@@ -22,7 +22,7 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.ProcessTrace;
 
 import com.seemla.rssf.Competition;
-import com.seemla.rssf.MatchResult;
+import com.seemla.rssf.MatchPairResult;
 import com.seemla.rssf.Phase;
 import com.seemla.rssf.QualifyingResult;
 import com.seemla.rssf.db.DatabaseProxy;
@@ -130,7 +130,7 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	 	    		db.insertPhase(competitionId, p.getName(), sdi.getUri());
 	 	    	}
 	 	    	
-	 	    	MatchResult m = q.getResult();
+	 	    	MatchPairResult m = q.getResult();
 	 	    	Integer team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
 	 	    	if (team1Id == null) {
 	 	    		db.insertTeam(m.getTeam1(), m.getCountry1());

@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon May 28 19:36:37 CEST 2012
+ * Updated by JCasGen Tue May 29 13:26:57 CEST 2012
  * @generated */
 public class Competition_Type extends Annotation_Type {
   /** @generated */

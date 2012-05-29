@@ -6,7 +6,7 @@
   <vendor/>
   <types>
     <typeDescription>
-      <name>com.seemla.rssf.MatchResult</name>
+      <name>com.seemla.rssf.MatchPairResult</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -104,7 +104,7 @@
         <featureDescription>
           <name>result</name>
           <description/>
-          <rangeTypeName>com.seemla.rssf.MatchResult</rangeTypeName>
+          <rangeTypeName>com.seemla.rssf.MatchPairResult</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>competition</name>

@@ -12,8 +12,8 @@
     <delegateAnalysisEngine key="QualifyingResultDBConsumerDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/QualifyingResultDBConsumerDescriptor.xml"/>
     </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="MatchResultAnnotatorDescriptor">
-      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchResultAnnotatorDescriptor.xml"/>
+    <delegateAnalysisEngine key="MatchPairResultAnnotatorDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchPairResultAnnotatorDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="PhaseAnnotatorDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/PhaseAnnotatorDescriptor.xml"/>
@@ -30,7 +30,7 @@
       <fixedFlow>
         <node>CompetitionAnnotatorDescriptor</node>
         <node>PhaseAnnotatorDescriptor</node>
-        <node>MatchResultAnnotatorDescriptor</node>
+        <node>MatchPairResultAnnotatorDescriptor</node>
         <node>QualifyingResultAnnotatorDescriptor</node>
       </fixedFlow>
     </flowConstraints>

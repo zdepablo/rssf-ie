@@ -21,7 +21,7 @@ import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
 import com.seemla.rssf.Competition;
-import com.seemla.rssf.MatchResult;
+import com.seemla.rssf.MatchPairResult;
 import com.seemla.rssf.Phase;
 
 /**
@@ -242,8 +242,8 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 
  	    
  	   
- 	    for (FSIterator MatchResultIter = jcas.getAnnotationIndex(MatchResult.type).iterator(); MatchResultIter.hasNext();) {
- 	    	MatchResult matchResult = (MatchResult) MatchResultIter.next();
+ 	    for (FSIterator MatchPairResultIter = jcas.getAnnotationIndex(MatchPairResult.type).iterator(); MatchPairResultIter.hasNext();) {
+ 	    	MatchPairResult matchResult = (MatchPairResult) MatchPairResultIter.next();
  	    	
  	    	PreparedStatement stmt = mapMatchResult(matchResult, sdi.getUri());
  	    	stmt.executeUpdate();
@@ -274,7 +274,7 @@ public class MatchResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	}
 
 
-	private PreparedStatement mapMatchResult( MatchResult matchResult, String origin) throws SQLException {
+	private PreparedStatement mapMatchResult( MatchPairResult matchResult, String origin) throws SQLException {
 		
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO MATCH_PAIR VALUES (?,?,?,?,?,?,?)");
 		
