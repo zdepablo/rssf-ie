@@ -2,9 +2,9 @@
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>true</primitive>
-  <annotatorImplementationName>com.seemla.rssf.annotators.QualifyingResultAnnotator</annotatorImplementationName>
+  <annotatorImplementationName>com.seemla.rssf.annotators.MatchResultAnnotator</annotatorImplementationName>
   <analysisEngineMetaData>
-    <name>QualifyingResultAnnotatorDescriptor</name>
+    <name>MatchResultDescriptor</name>
     <description/>
     <version>1.0</version>
     <vendor/>
@@ -12,20 +12,16 @@
     <configurationParameterSettings/>
     <typeSystemDescription>
       <imports>
-        <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml"/>
+        <import location="RSSFTypeSystem.xml"/>
       </imports>
     </typeSystemDescription>
     <typePriorities/>
     <fsIndexCollection/>
     <capabilities>
       <capability>
-        <inputs>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.Phase</type>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.Competition</type>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.MatchPairResult</type>
-        </inputs>
+        <inputs/>
         <outputs>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.QualifyingResult</type>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.MatchResult</type>
         </outputs>
         <languagesSupported/>
       </capability>

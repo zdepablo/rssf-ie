@@ -8,7 +8,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
 
-import com.seemla.rssf.MatchPairResult;;
+import com.seemla.rssf.MatchPairResult;
+import com.seemla.rssf.MatchResult;
 
 /**
  * An annotator for match results for qualifying rounds 
@@ -38,13 +39,13 @@ public class MatchPairResultAnnotator extends JCasAnnotator_ImplBase {
 	// Results usually have annotations 
 	private static final String result = "[\\*]?(\\d+)-(\\d+)[a-z\\*]?";
 	
-	private static final String cleanteam = "\\p{L}[\\p{L}\\d\\s;&-]+";
+	
 	
  	private static Pattern resultPattern = Pattern.compile(
  			team + "\\s+" + country + "\\s+" + team + "\\s+" + country + 
- 			"\\s+" + result + "\\s+" + result + "\\s+" + result);
+ 			"\\s+" + result + "(?:\\s+" + result + "\\s+" + result + ")?");
 
- 	private static Pattern cleanTeamPattern  = Pattern.compile(cleanteam);
+ 	
 
 	
 	@Override
@@ -58,18 +59,18 @@ public class MatchPairResultAnnotator extends JCasAnnotator_ImplBase {
 		int pos = 0;
 		while (matcher.find(pos)) {
 			
-			MatchPairResult annotation = new MatchPairResult(aJCas);
-			annotation.setBegin(matcher.start());
-			annotation.setEnd(matcher.end());
 			
 			int n = matcher.groupCount();
 			
 			if (n == 10 ) {
+				MatchPairResult annotation = new MatchPairResult(aJCas);
+				annotation.setBegin(matcher.start());
+				annotation.setEnd(matcher.end());				
 				
-				annotation.setTeam1(cleanTeamname(matcher.group(1)));
+				annotation.setTeam1(CleanUtils.cleanTeamname(matcher.group(1)));
 				annotation.setCountry1(matcher.group(2));
 				
-				annotation.setTeam2(cleanTeamname(matcher.group(3)));
+				annotation.setTeam2(CleanUtils.cleanTeamname(matcher.group(3)));
 				annotation.setCountry2(matcher.group(4));
 				
 				try {
@@ -85,28 +86,43 @@ public class MatchPairResultAnnotator extends JCasAnnotator_ImplBase {
 				} catch (NumberFormatException e) {
 					getContext().getLogger().log(Level.INFO, "Error casting integer" + matcher.group());
 				}
+			
+				annotation.addToIndexes();
 				
 			} else {
 				getContext().getLogger().log(Level.INFO, "Groups found: " + n + " in " + matcher.group());
 			}
 			
+			if (n == 6 ) {
+				MatchResult annotation = new MatchResult(aJCas);
+
+				annotation.setBegin(matcher.start());
+				annotation.setEnd(matcher.end());				
+				
+				annotation.setTeam1(CleanUtils.cleanTeamname(matcher.group(1)));
+				// annotation.setCountry1(matcher.group(2));
+				
+				annotation.setTeam2(CleanUtils.cleanTeamname(matcher.group(3)));
+				// annotation.setCountry2(matcher.group(4));
+
+				try {
+					annotation.setResult1(Integer.valueOf(matcher.group(5)));
+					annotation.setResult2(Integer.valueOf(matcher.group(6)));
+					
+				} catch (NumberFormatException e) {
+					getContext().getLogger().log(Level.INFO, "Error casting integer" + matcher.group());
+				}
+
+				
+			}
 			
 			
-			annotation.addToIndexes();
 			
 			pos = matcher.end();
 		}
 
 	}
 
-	private String cleanTeamname(String s) {
-		Matcher m = cleanTeamPattern.matcher(s);
-		
-		if (m.find()) {
-			return m.group();
-		} 
-		
-		return s;
-	}
+
 	
 }

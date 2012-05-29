@@ -21,6 +21,7 @@
       <capability>
         <inputs/>
         <outputs>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.MatchPairResult</type>
           <type allAnnotatorFeatures="true">com.seemla.rssf.MatchResult</type>
         </outputs>
         <languagesSupported/>
