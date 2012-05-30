@@ -22,7 +22,7 @@
         <inputs>
           <type allAnnotatorFeatures="true">com.seemla.rssf.Phase</type>
           <type allAnnotatorFeatures="true">com.seemla.rssf.Competition</type>
-          <type allAnnotatorFeatures="true">com.seemla.rssf.MatchPairResult</type>
+          <type allAnnotatorFeatures="true">com.seemla.rssf.Result</type>
         </inputs>
         <outputs>
           <type allAnnotatorFeatures="true">com.seemla.rssf.QualifyingResult</type>

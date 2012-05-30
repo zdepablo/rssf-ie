@@ -14,9 +14,9 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue May 29 13:46:08 CEST 2012
+ * Updated by JCasGen Wed May 30 19:44:33 CEST 2012
  * @generated */
-public class MatchPairResult_Type extends Annotation_Type {
+public class MatchPairResult_Type extends Result_Type {
   /** @generated */
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
@@ -45,24 +45,6 @@ public class MatchPairResult_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("com.seemla.rssf.MatchPairResult");
  
   /** @generated */
-  final Feature casFeat_team1;
-  /** @generated */
-  final int     casFeatCode_team1;
-  /** @generated */ 
-  public String getTeam1(int addr) {
-        if (featOkTst && casFeat_team1 == null)
-      jcas.throwFeatMissing("team1", "com.seemla.rssf.MatchPairResult");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_team1);
-  }
-  /** @generated */    
-  public void setTeam1(int addr, String v) {
-        if (featOkTst && casFeat_team1 == null)
-      jcas.throwFeatMissing("team1", "com.seemla.rssf.MatchPairResult");
-    ll_cas.ll_setStringValue(addr, casFeatCode_team1, v);}
-    
-  
- 
-  /** @generated */
   final Feature casFeat_country1;
   /** @generated */
   final int     casFeatCode_country1;
@@ -77,24 +59,6 @@ public class MatchPairResult_Type extends Annotation_Type {
         if (featOkTst && casFeat_country1 == null)
       jcas.throwFeatMissing("country1", "com.seemla.rssf.MatchPairResult");
     ll_cas.ll_setStringValue(addr, casFeatCode_country1, v);}
-    
-  
- 
-  /** @generated */
-  final Feature casFeat_team2;
-  /** @generated */
-  final int     casFeatCode_team2;
-  /** @generated */ 
-  public String getTeam2(int addr) {
-        if (featOkTst && casFeat_team2 == null)
-      jcas.throwFeatMissing("team2", "com.seemla.rssf.MatchPairResult");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_team2);
-  }
-  /** @generated */    
-  public void setTeam2(int addr, String v) {
-        if (featOkTst && casFeat_team2 == null)
-      jcas.throwFeatMissing("team2", "com.seemla.rssf.MatchPairResult");
-    ll_cas.ll_setStringValue(addr, casFeatCode_team2, v);}
     
   
  
@@ -233,16 +197,8 @@ public class MatchPairResult_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_team1 = jcas.getRequiredFeatureDE(casType, "team1", "uima.cas.String", featOkTst);
-    casFeatCode_team1  = (null == casFeat_team1) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_team1).getCode();
-
- 
     casFeat_country1 = jcas.getRequiredFeatureDE(casType, "country1", "uima.cas.String", featOkTst);
     casFeatCode_country1  = (null == casFeat_country1) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_country1).getCode();
-
- 
-    casFeat_team2 = jcas.getRequiredFeatureDE(casType, "team2", "uima.cas.String", featOkTst);
-    casFeatCode_team2  = (null == casFeat_team2) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_team2).getCode();
 
  
     casFeat_country2 = jcas.getRequiredFeatureDE(casType, "country2", "uima.cas.String", featOkTst);

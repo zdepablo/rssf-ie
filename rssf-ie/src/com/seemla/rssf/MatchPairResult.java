@@ -11,10 +11,10 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue May 29 13:46:08 CEST 2012
+ * Updated by JCasGen Wed May 30 19:44:33 CEST 2012
  * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
-public class MatchPairResult extends Annotation {
+public class MatchPairResult extends Result {
   /** @generated
    * @ordered 
    */
@@ -63,24 +63,6 @@ public class MatchPairResult extends Annotation {
  
     
   //*--------------*
-  //* Feature: team1
-
-  /** getter for team1 - gets 
-   * @generated */
-  public String getTeam1() {
-    if (MatchPairResult_Type.featOkTst && ((MatchPairResult_Type)jcasType).casFeat_team1 == null)
-      jcasType.jcas.throwFeatMissing("team1", "com.seemla.rssf.MatchPairResult");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((MatchPairResult_Type)jcasType).casFeatCode_team1);}
-    
-  /** setter for team1 - sets  
-   * @generated */
-  public void setTeam1(String v) {
-    if (MatchPairResult_Type.featOkTst && ((MatchPairResult_Type)jcasType).casFeat_team1 == null)
-      jcasType.jcas.throwFeatMissing("team1", "com.seemla.rssf.MatchPairResult");
-    jcasType.ll_cas.ll_setStringValue(addr, ((MatchPairResult_Type)jcasType).casFeatCode_team1, v);}    
-   
-    
-  //*--------------*
   //* Feature: country1
 
   /** getter for country1 - gets 
@@ -96,24 +78,6 @@ public class MatchPairResult extends Annotation {
     if (MatchPairResult_Type.featOkTst && ((MatchPairResult_Type)jcasType).casFeat_country1 == null)
       jcasType.jcas.throwFeatMissing("country1", "com.seemla.rssf.MatchPairResult");
     jcasType.ll_cas.ll_setStringValue(addr, ((MatchPairResult_Type)jcasType).casFeatCode_country1, v);}    
-   
-    
-  //*--------------*
-  //* Feature: team2
-
-  /** getter for team2 - gets 
-   * @generated */
-  public String getTeam2() {
-    if (MatchPairResult_Type.featOkTst && ((MatchPairResult_Type)jcasType).casFeat_team2 == null)
-      jcasType.jcas.throwFeatMissing("team2", "com.seemla.rssf.MatchPairResult");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((MatchPairResult_Type)jcasType).casFeatCode_team2);}
-    
-  /** setter for team2 - sets  
-   * @generated */
-  public void setTeam2(String v) {
-    if (MatchPairResult_Type.featOkTst && ((MatchPairResult_Type)jcasType).casFeat_team2 == null)
-      jcasType.jcas.throwFeatMissing("team2", "com.seemla.rssf.MatchPairResult");
-    jcasType.ll_cas.ll_setStringValue(addr, ((MatchPairResult_Type)jcasType).casFeatCode_team2, v);}    
    
     
   //*--------------*

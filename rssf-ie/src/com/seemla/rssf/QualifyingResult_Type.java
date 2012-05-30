@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue May 29 13:46:08 CEST 2012
+ * Updated by JCasGen Wed May 30 19:44:33 CEST 2012
  * @generated */
 public class QualifyingResult_Type extends Annotation_Type {
   /** @generated */
@@ -107,7 +107,7 @@ public class QualifyingResult_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_result = jcas.getRequiredFeatureDE(casType, "result", "com.seemla.rssf.MatchPairResult", featOkTst);
+    casFeat_result = jcas.getRequiredFeatureDE(casType, "result", "com.seemla.rssf.Result", featOkTst);
     casFeatCode_result  = (null == casFeat_result) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_result).getCode();
 
  

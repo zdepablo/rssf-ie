@@ -23,8 +23,12 @@ import org.apache.uima.util.ProcessTrace;
 
 import com.seemla.rssf.Competition;
 import com.seemla.rssf.MatchPairResult;
+import com.seemla.rssf.MatchPairResult_Type;
+import com.seemla.rssf.MatchResult;
+import com.seemla.rssf.MatchResult_Type;
 import com.seemla.rssf.Phase;
 import com.seemla.rssf.QualifyingResult;
+import com.seemla.rssf.Result;
 import com.seemla.rssf.db.DatabaseProxy;
 
 /**
@@ -130,23 +134,15 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	 	    		db.insertPhase(competitionId, p.getName(), sdi.getUri());
 	 	    	}
 	 	    	
-	 	    	MatchPairResult m = q.getResult();
-	 	    	Integer team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
-	 	    	if (team1Id == null) {
-	 	    		db.insertTeam(m.getTeam1(), m.getCountry1());
-	 	    		team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
-	 	    	}
-	 	    		
-	 	    	Integer team2Id = db.findTeam(m.getTeam2(), m.getCountry2());
-	 	    	if (team2Id == null) {
-	 	    		db.insertTeam(m.getTeam2(), m.getCountry2());
-	 	    		team2Id = db.findTeam(m.getTeam2(), m.getCountry2());
-	 	    	}
 	 	    	
-	 	    	db.insertMatchPair(team1Id, team2Id, 
-	 	    			m.getLeg1_1(), m.getLeg1_2(), m.getLeg2_1(), m.getLeg2_2(), 
-	 	    			m.getTotal_1(), m.getTotal_2(), 
-	 	    			competitionId, p.getName(), sdi.getUri());
+	 	    	Result m = q.getResult();
+	 	    	if ( m.getType().getShortName().equals("MatchPairResult")) {
+	 	    		insertMatchPairResult((MatchPairResult) m, competitionId, p, sdi.getUri());
+	 	    	} else if ( m.getType().getShortName().equals("MatchResult")) {
+	 	    		insertMatchResult((MatchResult) m, competitionId, p, sdi.getUri());
+	 	    	} else {
+	 	    		getLogger().log(Level.FINE, "Result of no processed type");
+	 	    	}
 	 	    	
 	 	    }
 
@@ -160,8 +156,75 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 		
 	}
 
+	private void insertMatchPairResult(MatchPairResult m, Integer competitionId, Phase p, String uri) throws SQLException {
+		
+	    	
+	    	Integer team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
+	    	if (team1Id == null) {
+	    		db.insertTeam(m.getTeam1(), m.getCountry1());
+	    		team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
+	    	}
+	    		
+	    	Integer team2Id = db.findTeam(m.getTeam2(), m.getCountry2());
+	    	if (team2Id == null) {
+	    		db.insertTeam(m.getTeam2(), m.getCountry2());
+	    		team2Id = db.findTeam(m.getTeam2(), m.getCountry2());
+	    	}
+	    	
+	    	if (team1Id != null && team2Id != null ) {
+
+		    	db.insertMatchPair(team1Id, team2Id, 
+		    			m.getLeg1_1(), m.getLeg1_2(), m.getLeg2_1(), m.getLeg2_2(), 
+		    			m.getTotal_1(), m.getTotal_2(), 
+		    			competitionId, p.getName(), uri);
+
+	    	} else {
+	    		if (team1Id == null) 
+	    			getLogger().log(Level.FINE, "team not found: " + m.getTeam1()  + " " +  m.getCountry1() + " at " + uri);
+	    		if (team2Id == null) 
+	    			getLogger().log(Level.FINE, "team not found: " + m.getTeam2()  + " " +  m.getCountry2() + " at " + uri);
+	    		
+	    	}
+	    	
+
+		
+	}
 	
+
+	private void insertMatchResult(MatchResult m, Integer competitionId, Phase p, String uri) throws SQLException {
+		
+    	
+    	Integer team1Id = db.findTeam(m.getTeam1(),null);
+    	if (team1Id == null) {
+    		db.insertTeam(m.getTeam1(), null);
+    		team1Id = db.findTeam(m.getTeam1());
+    	}
+    		
+    	Integer team2Id = db.findTeam(m.getTeam2());
+    	if (team2Id == null) {
+    		db.insertTeam(m.getTeam2(),null);
+    		team2Id = db.findTeam(m.getTeam2(),null);
+    	}
+    	
+    	if (team1Id != null && team2Id != null ) {
+    	
+    	db.insertMatch(team1Id, team2Id, 
+    			m.getResult1(), m.getResult2(),  
+    			m.getMid1(), m.getMid2(), 
+    			competitionId, p.getName(), uri);
+    	
+    	} else {
+
+    		if (team1Id == null) 
+    			getLogger().log(Level.FINE, "team not found: " + m.getTeam1()  + "(No country)  at " + uri);
+    		if (team2Id == null) 
+    			getLogger().log(Level.FINE, "team not found: " + m.getTeam2()  + "(No country) at " + uri);
+
+    	}
+
 	
+}
+
 	
 	
 	@Override

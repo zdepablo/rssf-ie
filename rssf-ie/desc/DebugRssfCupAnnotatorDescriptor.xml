@@ -3,17 +3,20 @@
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>false</primitive>
   <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="MatchPairResultAnnotatorDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchPairResultAnnotatorDescriptor.xml"/>
+    </delegateAnalysisEngine>
     <delegateAnalysisEngine key="CompetitionAnnotatorDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/CompetitionAnnotatorDescriptor.xml"/>
-    </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="QualifyingResultAnnotatorDescriptor">
-      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/QualifyingResultAnnotatorDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="QualifyingResultDBConsumerDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/QualifyingResultDBConsumerDescriptor.xml"/>
     </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="MatchPairResultAnnotatorDescriptor">
-      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchPairResultAnnotatorDescriptor.xml"/>
+    <delegateAnalysisEngine key="QualifyingResultAnnotatorDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/QualifyingResultAnnotatorDescriptor.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="MatchResultAnnotatorDescriptor">
+      <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/MatchResultAnnotatorDescriptor.xml"/>
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="PhaseAnnotatorDescriptor">
       <import location="/home/cdepablo/git/rssf-ie/rssf-ie/desc/PhaseAnnotatorDescriptor.xml"/>
@@ -30,6 +33,7 @@
       <fixedFlow>
         <node>CompetitionAnnotatorDescriptor</node>
         <node>PhaseAnnotatorDescriptor</node>
+        <node>MatchResultAnnotatorDescriptor</node>
         <node>MatchPairResultAnnotatorDescriptor</node>
         <node>QualifyingResultAnnotatorDescriptor</node>
       </fixedFlow>

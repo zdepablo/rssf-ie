@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue May 29 13:46:08 CEST 2012
+ * Updated by JCasGen Wed May 30 19:44:33 CEST 2012
  * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
 public class QualifyingResult extends Annotation {
@@ -67,14 +67,14 @@ public class QualifyingResult extends Annotation {
 
   /** getter for result - gets 
    * @generated */
-  public MatchPairResult getResult() {
+  public Result getResult() {
     if (QualifyingResult_Type.featOkTst && ((QualifyingResult_Type)jcasType).casFeat_result == null)
       jcasType.jcas.throwFeatMissing("result", "com.seemla.rssf.QualifyingResult");
-    return (MatchPairResult)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((QualifyingResult_Type)jcasType).casFeatCode_result)));}
+    return (Result)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((QualifyingResult_Type)jcasType).casFeatCode_result)));}
     
   /** setter for result - sets  
    * @generated */
-  public void setResult(MatchPairResult v) {
+  public void setResult(Result v) {
     if (QualifyingResult_Type.featOkTst && ((QualifyingResult_Type)jcasType).casFeat_result == null)
       jcasType.jcas.throwFeatMissing("result", "com.seemla.rssf.QualifyingResult");
     jcasType.ll_cas.ll_setRefValue(addr, ((QualifyingResult_Type)jcasType).casFeatCode_result, jcasType.ll_cas.ll_getFSRef(v));}    

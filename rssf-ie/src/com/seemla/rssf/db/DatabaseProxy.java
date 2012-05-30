@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -125,6 +126,7 @@ public class DatabaseProxy {
         	this.stmt.execute("DROP TABLE PHASE");
         	this.stmt.execute("DROP TABLE TEAM");
         	this.stmt.execute("DROP TABLE MATCH_PAIR");
+        	this.stmt.execute("DROP TABLE MATCH");
         	logger.log(Level.INFO, "First Time Initialization: Delete tables");
         	
         } catch (SQLException e) {
@@ -157,7 +159,7 @@ public class DatabaseProxy {
         String TEAM_CREATE = "CREATE TABLE TEAM (" +
         		"id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
         		"name VARCHAR(50) NOT NULL," +
-        		"country VARCHAR(3) NOT NULL," +
+        		"country VARCHAR(3)," +
         		"CONSTRAINT team_pk PRIMARY KEY (id)" +
         		")";
 
@@ -181,17 +183,31 @@ public class DatabaseProxy {
         		"CONSTRAINT match_pair_team2_fk FOREIGN KEY (team2) REFERENCES TEAM(id)" +
         		")";
 
-//		if (this.con == null)
-//			this.open();
-//        
-//		Statement sqlStatement = con.createStatement();
+        String MATCH_CREATE = "CREATE TABLE MATCH_SINGLE (" +
+        		"id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+        		"team1 INTEGER NOT NULL," +
+        		"team2 INTEGER NOT NULL," +
+        		"result1 INTEGER NOT NULL," +
+        		"result2 INTEGER NOT NULL," +
+        		"mid1 INTEGER," +
+        		"mid2 INTEGER," +
+        		"competition INTEGER NOT NULL," +
+        		"phase VARCHAR(50) NOT NULL," +
+        		"uri VARCHAR(80), " +
+        		"CONSTRAINT match_single_pk PRIMARY KEY (id)," +
+        		"CONSTRAINT match_single_phase_fk FOREIGN KEY (competition,phase) REFERENCES PHASE(competition,name)," +
+        		"CONSTRAINT match_single_team1_fk FOREIGN KEY (team1) REFERENCES TEAM(id)," +
+        		"CONSTRAINT match_single_team2_fk FOREIGN KEY (team2) REFERENCES TEAM(id)" +
+        		")";
+        
+        
 		
 		this.stmt.execute(COMPETITION_CREATE);
 		this.stmt.execute(PHASE_CREATE);
 		this.stmt.execute(TEAM_CREATE);
 		this.stmt.execute(MATCH_PAIR_CREATE);
-		
-		// sqlStatement.close();
+		this.stmt.execute(MATCH_CREATE);
+
 		logger.log(Level.INFO, "First Time Initialization: Create tables");        
 		
 	}
@@ -279,9 +295,17 @@ public class DatabaseProxy {
 		
 		Integer id = null;
 		        
-		PreparedStatement stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=? AND country=?");
-		stmt.setString(1, name);
-		stmt.setString(2, country);
+		PreparedStatement stmt;
+		
+		if (country != null) {
+			stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=? AND country=?");
+			stmt.setString(1, name);
+			stmt.setString(2, country);			
+		} else {			
+			stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=? AND country IS NULL");
+			stmt.setString(1, name);			
+		}
+			
 		
 		stmt.execute();
 		ResultSet resultSet = stmt.getResultSet();
@@ -292,6 +316,25 @@ public class DatabaseProxy {
 		stmt.close();
 		return id ;
 	}
+
+	
+	public Integer findTeam(String name) throws SQLException {
+		
+		Integer id = null;
+		        
+		PreparedStatement stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=?");
+		stmt.setString(1, name);
+		
+		stmt.execute();
+		ResultSet resultSet = stmt.getResultSet();
+		
+		if (resultSet != null && resultSet.next()) 			
+			id = resultSet.getInt(1);
+		
+		stmt.close();
+		return id ;
+	}
+
 	
 
 	public boolean insertTeam(String name, String country) throws SQLException {
@@ -299,7 +342,10 @@ public class DatabaseProxy {
 		String insert = "INSERT INTO TEAM (name,country) VALUES (?,?)";
 		PreparedStatement stmt = con.prepareStatement(insert);
 		stmt.setString(1, truncate(name,MAX_TEAM_LENGTH));
-		stmt.setString(2, truncate(country, MAX_COUNTRY_LENGTH));
+		if (country != null)
+			stmt.setString(2, truncate(country, MAX_COUNTRY_LENGTH));
+		else 
+			stmt.setNull(2, Types.VARCHAR);
 		
 		stmt.execute();
 		
@@ -346,6 +392,45 @@ public class DatabaseProxy {
 		return false;
 	}
 
+	public boolean insertMatch(
+			Integer team1, Integer team2, 
+			Integer result1, Integer result2, 
+			Integer mid1, Integer mid2, 
+			Integer competition, String phase, String uri) throws SQLException {
+		
+		String insert = 
+				"INSERT INTO MATCH_SINGLE (team1,team2,result1,result2,mid1,mid2,competition,phase,uri) " +
+				"VALUES (?,?,?,?,?,?,?,?,?)";
+
+		PreparedStatement stmt = con.prepareStatement(insert);
+		stmt.setInt(1, team1);
+		stmt.setInt(2, team2);
+		
+		stmt.setInt(3, result1);
+		stmt.setInt(4, result2);
+
+		if (mid1 != null && mid1 >= 0)
+			stmt.setInt(5, mid1);
+		else 
+			stmt.setNull(5, Types.INTEGER);
+		
+		if (mid2 != null && mid2 >= 0)	
+			stmt.setInt(6, mid2);
+		else stmt.setNull(6, Types.INTEGER);
+
+		stmt.setInt(7, competition);
+		stmt.setString(8, truncate(phase, MAX_PHASE_LENGTH));
+		stmt.setString(9, truncate(uri, MAX_URI_LENGTH));
+
+		stmt.execute();
+		
+		logger.log(Level.FINER, "inserted competition");
+		stmt.close();
+
+		
+		return false;
+	}
+	
 
 	/**
 	 * Loads the Derby driver
@@ -417,6 +502,9 @@ public class DatabaseProxy {
 			Integer teamId2 = db.findTeam("Real Madrid FC", "Esp");
 			
 			db.insertMatchPair(teamId1, teamId2, 1, 1, 1, 1, 2, 2, competitionId, "Semi-Finals","");
+			
+			db.insertMatch(teamId1, teamId2, 1, 2, null, null, competitionId, "Semi-Finals","");
+			db.insertMatch(teamId1, teamId2, 1, 2, 1, 1, competitionId, "Semi-Finals","");
 			
 			
 		} catch (SQLException e) {

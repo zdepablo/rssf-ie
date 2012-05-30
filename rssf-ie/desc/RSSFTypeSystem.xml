@@ -8,20 +8,10 @@
     <typeDescription>
       <name>com.seemla.rssf.MatchPairResult</name>
       <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <supertypeName>com.seemla.rssf.Result</supertypeName>
       <features>
         <featureDescription>
-          <name>team1</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
           <name>country1</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>team2</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
@@ -104,7 +94,7 @@
         <featureDescription>
           <name>result</name>
           <description/>
-          <rangeTypeName>com.seemla.rssf.MatchPairResult</rangeTypeName>
+          <rangeTypeName>com.seemla.rssf.Result</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>competition</name>
@@ -121,18 +111,8 @@
     <typeDescription>
       <name>com.seemla.rssf.MatchResult</name>
       <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <supertypeName>com.seemla.rssf.Result</supertypeName>
       <features>
-        <featureDescription>
-          <name>team1</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>team2</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
         <featureDescription>
           <name>result1</name>
           <description/>
@@ -152,6 +132,23 @@
           <name>mid2</name>
           <description/>
           <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>com.seemla.rssf.Result</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>team1</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>team2</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>

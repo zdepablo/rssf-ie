@@ -11,10 +11,10 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue May 29 13:46:08 CEST 2012
+ * Updated by JCasGen Wed May 30 19:44:33 CEST 2012
  * XML source: /home/cdepablo/git/rssf-ie/rssf-ie/desc/RSSFTypeSystem.xml
  * @generated */
-public class MatchResult extends Annotation {
+public class MatchResult extends Result {
   /** @generated
    * @ordered 
    */
@@ -61,42 +61,6 @@ public class MatchResult extends Annotation {
   private void readObject() {/*default - does nothing empty block */}
      
  
-    
-  //*--------------*
-  //* Feature: team1
-
-  /** getter for team1 - gets 
-   * @generated */
-  public String getTeam1() {
-    if (MatchResult_Type.featOkTst && ((MatchResult_Type)jcasType).casFeat_team1 == null)
-      jcasType.jcas.throwFeatMissing("team1", "com.seemla.rssf.MatchResult");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((MatchResult_Type)jcasType).casFeatCode_team1);}
-    
-  /** setter for team1 - sets  
-   * @generated */
-  public void setTeam1(String v) {
-    if (MatchResult_Type.featOkTst && ((MatchResult_Type)jcasType).casFeat_team1 == null)
-      jcasType.jcas.throwFeatMissing("team1", "com.seemla.rssf.MatchResult");
-    jcasType.ll_cas.ll_setStringValue(addr, ((MatchResult_Type)jcasType).casFeatCode_team1, v);}    
-   
-    
-  //*--------------*
-  //* Feature: team2
-
-  /** getter for team2 - gets 
-   * @generated */
-  public String getTeam2() {
-    if (MatchResult_Type.featOkTst && ((MatchResult_Type)jcasType).casFeat_team2 == null)
-      jcasType.jcas.throwFeatMissing("team2", "com.seemla.rssf.MatchResult");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((MatchResult_Type)jcasType).casFeatCode_team2);}
-    
-  /** setter for team2 - sets  
-   * @generated */
-  public void setTeam2(String v) {
-    if (MatchResult_Type.featOkTst && ((MatchResult_Type)jcasType).casFeat_team2 == null)
-      jcasType.jcas.throwFeatMissing("team2", "com.seemla.rssf.MatchResult");
-    jcasType.ll_cas.ll_setStringValue(addr, ((MatchResult_Type)jcasType).casFeatCode_team2, v);}    
-   
     
   //*--------------*
   //* Feature: result1
