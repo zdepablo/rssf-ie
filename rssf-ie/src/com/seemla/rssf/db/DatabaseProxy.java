@@ -150,6 +150,7 @@ public class DatabaseProxy {
         String PHASE_CREATE = "CREATE TABLE PHASE (" +
         		"competition INTEGER NOT NULL," +
         		"name VARCHAR(50) NOT NULL," +
+        		"num INTEGER," +
         		"numToFinal INTEGER," +
         		"uri VARCHAR(80)," +
         		"CONSTRAINT phase_pk PRIMARY KEY (competition,name)," +
@@ -274,13 +275,14 @@ public class DatabaseProxy {
 		return b ;
 	}
 
-	public boolean insertPhase(Integer competitionId, String name, String origin) throws SQLException {
+	public boolean insertPhase(Integer competitionId, String name, Integer order, String origin) throws SQLException {
 		
-		String insert = "INSERT INTO PHASE (competition,name,uri) VALUES (?,?,?)";
+		String insert = "INSERT INTO PHASE (competition,name,num,uri) VALUES (?,?,?,?)";
 		PreparedStatement stmt = con.prepareStatement(insert);
 		stmt.setInt(1, competitionId);
 		stmt.setString(2, truncate(name,MAX_PHASE_LENGTH));
-		stmt.setString(3, truncate(origin, MAX_URI_LENGTH));
+		stmt.setInt(3, order);
+		stmt.setString(4, truncate(origin, MAX_URI_LENGTH));
 		
 		stmt.execute();
 		
@@ -492,7 +494,7 @@ public class DatabaseProxy {
 			db.insertCompetition("Champion's Cup", "1995-96",1995, "" );
 			Integer competitionId = db.findCompetition("Champion's Cup", "1995-96");
 			
-			db.insertPhase(competitionId, "Semi-Finals", "");
+			db.insertPhase(competitionId, "Semi-Finals",1, "");
 			db.findPhase(competitionId, "Semi-Finals");
 			
 			db.insertTeam("FC Barcelona", "Esp");

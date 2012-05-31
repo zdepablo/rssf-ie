@@ -115,6 +115,10 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 			
 			getLogger().log(Level.INFO, "Processing doc: '" + sdi.getUri() + "'");
 	 	    
+			// A variable to control the order of a phase in a competition, 
+			// phases use to appear in sequential order that corresponds to chonological in competitions  
+			int phaseOrder = 0;
+			
 	 	    for (FSIterator iter = jcas.getAnnotationIndex(QualifyingResult.type).iterator(); iter.hasNext();) {
 	 	    	
 	 	    	QualifyingResult q = (QualifyingResult) iter.next();
@@ -125,13 +129,18 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	 	    	if (competitionId == null) {
 	 	    		db.insertCompetition(c.getName(), c.getSeason(), c.getStart(), sdi.getUri());
 	 	    		competitionId = db.findCompetition(c.getName(), c.getSeason());
+	 	    		
+	 	    		// Starts a competition 
+	 	    		phaseOrder = 0;
 	 	    	}
 	 	    	
 	 	    	// Insert phase if does not exist 
 	 	    	Phase p = q.getPhase();
 	 	    	boolean inserted = db.findPhase(competitionId, p.getName());
 	 	    	if (!inserted) {
-	 	    		db.insertPhase(competitionId, p.getName(), sdi.getUri());
+	 	    		// Increase phase order
+	 	    		phaseOrder++;
+	 	    		db.insertPhase(competitionId, p.getName(),phaseOrder, sdi.getUri());
 	 	    	}
 	 	    	
 	 	    	

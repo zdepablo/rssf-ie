@@ -33,7 +33,7 @@ public class MatchPairResultAnnotator extends JCasAnnotator_ImplBase {
 	private static final String team = "((?:[\\p{L}\\p{P}\\d+]+\\s)*[\\p{L}\\p{P}\\d]+?)";
 	
 	// A pattern that match country abbreviations as are used in RSSF: three characters 
-	private static final String country = "([A-Za-z]{3}+)";
+	private static final String country = "([A-Z][A-Za-z]{2}+)";
 	
 	// A pattern to capture match results as given in the gualifyinng, a number of digits separated by a dash 
 	// Results usually have annotations 
