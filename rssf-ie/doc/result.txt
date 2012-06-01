@@ -1,0 +1,503 @@
+ ID  NAME                          COUNTRY 
+ --- ----------------------------- ------- 
+   1 Real Madrid                   Spa    
+   2 IBK                           Isl    
+   3 RSC Anderlecht                Bel    
+   4 Vejle BK                      Den    
+   5 Uacute;jpesti D&oacute;zsa    Hun    
+   6 FC Basle                      Sui    
+   7 Celtic                        Sco    
+   8 Rosenborg BK                  Nor    
+   9 Galatasaray                   Tur    
+  10 Bayern M&uuml;nchen           FRG    
+  11 Olympique Marseille           Fra    
+  12 Juventus                      Ita    
+  13 Malm&ouml; FF                 Swe    
+  14 SL Benfica                    Por    
+  15 Wacker Innsbruck              Aut    
+  16 Dinamo Kyiv                   URS    
+  17 CSKA                          Bul    
+  18 Panathinaikos                 Gre    
+  19 Sliema Wanderers              Mlt    
+  20 Gornik Zabrze                 Pol    
+  21 FC Magdeburg                  GDR    
+  22 TPS                           Fin    
+  23 Aris Bonnevoie                Lux    
+  24 FC Arges                      Rom    
+  25 Waterford                     Irl    
+  26 Omonia                        Cyp    
+  27 w Panathinaikos had won       the    
+  28 nd                            leg    
+  29 Spartak Trnava                Tch    
+  30 Derby County                  Eng    
+  31 Ajax                          Ned    
+  32 Ajax                          NULL   
+  33 SC Bastia                     Fra    
+  34 Atl&eacute;tico Madrid        Esp    
+  35 Floriana                      Mlt    
+  36 Ferencvarosi TC               Hun    
+  37 FC Schalke 04                 FRG    
+  38 FC Slavia                     Bul    
+  39 Standard CL                   Bel    
+  40 Sparta Praha                  Tch    
+  41 Spartak Moskva                URS    
+  42 FC Den Haag                   Ned    
+  43 Vikingur                      Isl    
+  44 Legia Warszawa                Pol    
+  45 Ankarag&uuml;c&uuml;          Tur    
+  46 Leeds United                  Eng    
+  47 NK Hajduk                     Yug    
+  48 Fredrikstad FK                Nor    
+  49 SK Rapid                      Aut    
+  50 PAOK                          Gre    
+  51 FC Z&uuml;rich                Sui    
+  52 Wrexham                       Wal    
+  53 Sporting CP                   Por    
+  54 Hibernian                     Sco    
+  55 Rapid Bucuresti               Rom    
+  56 Landskrona BoIS               Swe    
+  57 Pezoporikos                   Cyp    
+  58 Cork Hibernians               Irl    
+  59 BK Fremad Amager              Den    
+  60 KS Besa                       Alb    
+  61 FC Carl Zeiss Jena            GDR    
+  62 MP                            Fin    
+  63 Red Boys Differdange          Lux    
+  64 Milan                         Ita    
+  65 Rapid Bucharest               Rom    
+  66 Sparta Prague                 Tch    
+  67 Milan                         NULL   
+  68 Aberdeen                      Sco    
+  69 Borussia M&ouml;nchengladbach FRG    
+  70 Aring;tvidabergs FF           Swe    
+  71 FC Brugge KV                  Bel    
+  72 Manchester City               Eng    
+  73 Valencia                      Esp    
+  74 SFK Lyn                       Nor    
+  75 Tottenham Hotspur             Eng    
+  76 FC K&ouml;ln                  FRG    
+  77 Bohemians                     Irl    
+  78 Honv&eacute;d                 Hun    
+  79 Partick Thistle               Sco    
+  80 Viking FK                     Nor    
+  81 IBV                           Isl    
+  82 Feyenoord                     Ned    
+  83 US Rumelange                  Lux    
+  84 Liverpool                     Eng    
+  85 Eintracht Frankfurt           FRG    
+  86 N&icirc;mes Olympique         Fra    
+  87 Grasshopper-Club Z&uuml;rich  Sui    
+  88 Vit&oacute;ria FC             Por    
+  89 Zaglebie Sosnowiec            Pol    
+  90 Stoke City                    Eng    
+  91 FC Kaiserslautern             FRG    
+  92 Racing White                  Bel    
+  93 GD Cuf Barriero               Por    
+  94 Torino                        Ita    
+  95 UD Las Palmas                 Esp    
+  96 FC Sochaux-Montb&eacute;liard Fra    
+  97 BK Frem                       Den    
+  98 Olympiakos                    Gre    
+  99 Cagliari                      Ita    
+ 100 SCO Angers                    Fra    
+ 101 Berliner FC Dynamo            GDR    
+ 102 FC Porto                      Por    
+ 103 FC Barcelona                  Esp    
+ 104 Universitatea Cluj            Rom    
+ 105 FC Levski-Spartak             Bul    
+ 106 Crvena Zvezda                 Yug    
+ 107 Lausanne-Sports               Sui    
+ 108 Internazionale                Ita    
+ 109 Valetta                       Mlt    
+ 110 FC Beroe                      Bul    
+ 111 FK Austria                    Aut    
+ 112 UT Arad                       Rom    
+ 113 IFK Norrk&ouml;ping           Swe    
+ 114 EPA                           Cyp    
+ 115 Ararat Yerevan                URS    
+ 116 AEK                           Gre    
+ 117 Salg&oacute;tarj&aacute;n BTC Hun    
+ 118 Eskisehirspor                 Tur    
+ 119 Fiorentina                    Ita    
+ 120 Dukla Praha                   Tch    
+ 121 OFK Beograd                   Yug    
+ 122 Slovan Bratislava             Tch    
+ 123 FK Vojvodina                  Yug    
+ 124 Dinamo Tbilisi                URS    
+ 125 FC Twente                     Ned    
+ 126 Ruch Chorz&oacute;w           Pol    
+ 127 Fenerbah&ccedil;e             Tur    
+ 128 SG Dynamo Dresden             GDR    
+ 129 SK V&Ouml;EST                 Aut    
+ 130 Hvidovre IF                   Den    
+ 131 AC Fiorentina                 Ita    
+ 132 GD Cuf Barreiro               Por    
+ 133 Berlin FC Dynamo              GDR    
+ 134 Liverpool                     NULL   
+ 135 Borussia M&ouml;nchengladbach NULL   
+ 136 Manchester United             Eng    
+ 137 Hibernians                    Mlt    
+ 138 Olympiakos                    Cyp    
+ 139 FK Sarajevo                   Yug    
+ 140 Djurgardens IF                Swe    
+ 141 Dynamo Kiev                   URS    
+ 142 FK Skeid                      Nor    
+ 143 FC Karl-Marx-Stadt            GDR    
+ 144 FC Botev                      Bul    
+ 145 Besiktas                      Tur    
+ 146 SK Rapid Vienna               Aut    
+ 147 Dundalk                       Irl    
+ 148 Vasas SC                      Hun    
+ 149 Valur                         Isl    
+ 150 AS La Jeunesse D              Lux    
+ 151 AS Saint-Etienne              Fra    
+ 152 KuPS                          Fin    
+ 153 Glentoran                     Nir    
+ 154 Eintracht Brunswick           FRG    
+ 155 Manchester United             NULL   
+ 156 AC Milan                      Ita    
+ 157 FC Levski                     Bul    
+ 158 Vasas ETO Gyor                Hun    
+ 159 Apollon                       Cyp    
+ 160 KR                            Isl    
+ 161 Altay                         Tur    
+ 162 Crusaders                     Nir    
+ 163 Steaua Bucharest              Rom    
+ 164 Vitoria FC                    Por    
+ 165 Bayern Munich                 FRG    
+ 166 Shamrock Rovers               Irl    
+ 167 Cardiff City                  Wal    
+ 168 NAC                           Ned    
+ 169 Torpedo Moscow                URS    
+ 170 BSG Sachsenring Zwickau       GDR    
+ 171 Olympique Lyonnais            Fra    
+ 172 HJK                           Fin    
+ 173 Wisla Krakow                  Pol    
+ 174 Hamburger SV                  FRG    
+ 175 Randers Freja                 Den    
+ 176 AC Milan                      NULL   
+ 177 CA Spora Luxembourg           Lux    
+ 178 FK Partizan                   Yug    
+ 179 FC Lokomotiv                  Bul    
+ 180 SSC Napoli                    Ita    
+ 181 Hannover 96                   FRG    
+ 182 OGC Nice                      Fra    
+ 183 Club Brugge KV                Bel    
+ 184 FC Cologne                    FRG    
+ 185 Slavia Prague                 Tch    
+ 186 Dynamo Dresden                GDR    
+ 187 Rangers                       Sco    
+ 188 FC Zurich                     Sui    
+ 189 Nottingham Forest             Eng    
+ 190 RFC Liegeois                  Bel    
+ 191 DWS                           Ned    
+ 192 Dundee                        Sco    
+ 193 Bologna                       Ita    
+ 194 NK Dinamo                     Yug    
+ 195 Petrolul Ploiesti             Rom    
+ 196 Wiener Sport-Club             Aut    
+ 197 Atletico Madrid               Esp    
+ 198 Royal Antwerp                 Bel    
+ 199 Goztepe                       Tur    
+ 200 FC Lokomotive Leipzig         GDR    
+ 201 Linfield                      Nir    
+ 202 Athletic Bilbao               Esp    
+ 203 St                            Irl    
+ 204 Girondins Bordeaux            Fra    
+ 205 Malmo FF                      Swe    
+ 206 Servette FC Geneva            Sui    
+ 207 TSV 1860 Munich               FRG    
+ 208 DOS                           Ned    
+ 209 Real Zaragoza                 Esp    
+ 210 Ferencvarosi                  Hun    
+ 211 Leeds United                  NULL   
+ 212 Ferencvarosi                  NULL   
+ 213 PSV                           Ned    
+ 214 Rabat Ajax                    Mlt    
+ 215 Avenir Beggen                 Lux    
+ 216 Red Star                      Yug    
+ 217 Dinamo Kiev                   URS    
+ 218 BSC Young Boys                Sui    
+ 219 Brondby IF                    Den    
+ 220 Honved                        Hun    
+ 221 KS Dinamo                     Alb    
+ 222 Apoel                         Cyp    
+ 223 Orgryte IS                    Swe    
+ 224 Paris Saint-Germain           Fra    
+ 225 TJ Vitkovice                  Tch    
+ 226 FC Porto                      NULL   
+ 227 VfB Stuttgart                 FRG    
+ 228 AS Roma                       Ita    
+ 229 Lillestrom SK                 Nor    
+ 230 Nentori                       Alb    
+ 231 Dinamo Bucharest              Rom    
+ 232 FC Sion                       Sui    
+ 233 Bursapor                      Tur    
+ 234 Zurrieq                       Mlt    
+ 235 Valkeakoskean Haka            Fin    
+ 236 US Luxembourg                 Lux    
+ 237 Fram                          Isl    
+ 238 GKS Katowice                  Pol    
+ 239 B1903                         Den    
+ 240 FC Vitosha                    Bul    
+ 241 FK Velez                      Yug    
+ 242 SV Werder Bremen              FRG    
+ 243 Kalmar FF                     Swe    
+ 244 Bayer Leverkusen              FRG    
+ 245 Bayer Uerdingen               FRG    
+ 246 Borussia Monchengladbach      FRG    
+ 247 RC Lens                       Fra    
+ 248 Dundee United                 Sco    
+ 249 FC Groningen                  Ned    
+ 250 Galway United                 Irl    
+ 251 IA                            Isl    
+ 252 AA Ghent                      Bel    
+ 253 Pecsi MSC                     Hun    
+ 254 Vitoria SC                    Por    
+ 255 Heart Of Midlothian           Sco    
+ 256 Dukla Prague                  Tch    
+ 257 FC Nantes                     Fra    
+ 258 Dinamo Minsk                  URS    
+ 259 Raba Vasas ETO                Hun    
+ 260 Coleraine                     Nir    
+ 261 BSG Stahl Brandenburg         GDR    
+ 262 Legia Warsaw                  Pol    
+ 263 Dnepr Dnepropetrovsk          URS    
+ 264 Sigma Olomouc                 Tch    
+ 265 IFK Gothenburg                Swe    
+ 266 Ilves                         Fin    
+ 267 Linzer ASK                    Aut    
+ 268 Widzew Lodz                   Pol    
+ 269 Neuchatel Xamax               Sui    
+ 270 Lyngby BK                     Den    
+ 271 SK Beveren                    Bel    
+ 272 Valerengens IF                Nor    
+ 273 OFI                           Gre    
+ 274 KS Flamurtari                 Alb    
+ 275 Boavista                      Por    
+ 276 FC Trakia                     Bul    
+ 277 FC Tirol-Innsbruck            Aut    
+ 278 Sredets                       Bul    
+ 279 Sportul Studentesc            Rom    
+ 280 Universitatea Craiova         Rom    
+ 281 NK Rijeka                     Yug    
+ 282 Toulouse FC                   Fra    
+ 283 Spartak Moscow                URS    
+ 284 FC Lucerne                    Sui    
+ 285 IFK Gothenburg                NULL   
+ 286 Dundee United                 NULL   
+ 287 Mogren Budva                  Mng    
+ 288 Tre Fiori                     SMa    
+ 289 UE Sant Julià                 And    
+ 290 Makedonija Skopje             Mac    
+ 291 BATE Barysau                  Bls    
+ 292 Pyunik Yerevan                Arm    
+ 293 Dinamo Zagreb                 Cro    
+ 294 EB                            Far    
+ 295 APOEL Lefkosia                Cyp    
+ 296 Ekranas Panevezys             Lit    
+ 297 FK Baki                       Aze    
+ 298 Rhyl                          Wal    
+ 299 Partizan                      Ser    
+ 300 FK Ventspils                  Lat    
+ 301 F91 Dudelange                 Lux    
+ 302 Inter Turku                   Fin    
+ 303 Sheriff Tiraspol              Mol    
+ 304 WIT Georgia Tbilisi           Geo    
+ 305 Maribor                       Sln    
+ 306 Levski Sofia                  Bul    
+ 307 Maccabi Haifa                 Isr    
+ 308 Debreceni VSC                 Hun    
+ 309 SK Tirana                     Alb    
+ 310 Stabæk Fotball                Nor    
+ 311 FC København                  Den    
+ 312 Zrinjski Mostar               Bos    
+ 313 Slovan Bratislava             Svk    
+ 314 Red Bull Salzburg             Aut    
+ 315 Bohemians                     Ire    
+ 316 Wisla Kraków                  Pol    
+ 317 Levadia Tallinn               Est    
+ 318 FH                            Isl    
+ 319 FK Aqtöbe                     Kaz    
+ 320 AC Sparta Praha               Cze    
+ 321 Sivasspor                     Tur    
+ 322 Shakhtar Donetsk              Ukr    
+ 323 FC Timisoara                  Rom    
+ 324 SK Slavia Praha               Cze    
+ 325 FC Zürich                     Sui    
+ 326 Dinamo Moskva                 Rus    
+ 327 FC Twente                     Net    
+ 328 Arsenal                       Eng    
+ 329 VfB Stuttgart                 Ger    
+ 330 Atlético Madrid               Esp    
+ 331 Juventus                      NULL   
+ 332 Girondins de Bordeaux         NULL   
+ 333 Maccabi Haifa                 NULL   
+ 334 Bayern München                NULL   
+ 335 Besiktas JK                   NULL   
+ 336 VfL Wolfsburg                 NULL   
+ 337 CSKA Moskva                   NULL   
+ 338 FC Zürich                     NULL   
+ 339 Olympique Marseille           NULL   
+ 340 Milan AC                      NULL   
+ 341 Real Madrid                   NULL   
+ 342 Atlético Madrid               NULL   
+ 343 Chelsea                       NULL   
+ 344 APOEL Lefkosia                NULL   
+ 345 Olympique Lyonnais            NULL   
+ 346 Debreceni VSC                 NULL   
+ 347 Fiorentina                    NULL   
+ 348 Dynamo Kyiv                   NULL   
+ 349 Rubin Kazan                   NULL   
+ 350 Internazionale                NULL   
+ 351 FC Barcelona                  NULL   
+ 352 Sevilla FC                    NULL   
+ 353 Unirea Urziceni               NULL   
+ 354 VfB Stuttgart                 NULL   
+ 355 Rangers                       NULL   
+ 356 Olympiakos                    NULL   
+ 357 AZ                            NULL   
+ 358 Standard CL                   NULL   
+ 359 Arsenal                       NULL   
+ 360 Milan AC                      Ita    
+ 361 Bayern München                Ger    
+ 362 Girondins de Bordeaux         Fra    
+ 363 CSKA Moskva                   Rus    
+ 364 Sevilla FC                    Esp    
+ 365 Chelsea                       Eng    
+ 366 Olimpi Rustavi                Geo    
+ 367 B36                           Far    
+ 368 Banants Yerevan               Arm    
+ 369 Siroki Brijeg                 Bos    
+ 370 Dinaburg Daugavpils           Lat    
+ 371 Kalju Nõmme                   Est    
+ 372 Simurq Zaqatala               Aze    
+ 373 Bnei-Yehuda                   Isr    
+ 374 FC Lahti                      Fin    
+ 375 Dinamo Tiranë                 Alb    
+ 376 Sutjeska Niksic               Mng    
+ 377 MTZ-RIPA Minsk                Bls    
+ 378 Valletta                      Mlt    
+ 379 Keflavík                      Isl    
+ 380 Dynama Minsk                  Bls    
+ 381 Renova Cepciste               Mac    
+ 382 Trans Narva                   Est    
+ 383 Rudar Velenje                 Sln    
+ 384 Zimbru Chisinau               Mol    
+ 385 Oqjetpes Kökshetau            Kaz    
+ 386 Anorthosis Famagusta          Cyp    
+ 387 UN Käerjéng 97                Lux    
+ 388 CS Grevenmacher               Lux    
+ 389 Vetra Vilnius                 Lit    
+ 390 Randers FC                    Den    
+ 391 Slaven Belupo Koprivnica      Cro    
+ 392 Birkirkara                    Mlt    
+ 393 Spartak Trnava                Svk    
+ 394 Inter Baki                    Aze    
+ 395 Haladás                       Hun    
+ 396 Yertis Pavlodar               Kaz    
+ 397 NSÍ                           Far    
+ 398 Sligo Rovers                  Ire    
+ 399 Vllaznia Shkodër              Alb    
+ 400 Buducnost Podgorica           Mng    
+ 401 Polonia Warszawa              Pol    
+ 402 Helsingborgs IF               Swe    
+ 403 MIKA Ashtarak                 Arm    
+ 404 Lisburn Distillery            Nir    
+ 405 FC Zestafoni                  Geo    
+ 406 The New Saints                Wal    
+ 407 Motherwell                    Sco    
+ 408 Llanelli                      Wal    
+ 409 Maccabi Netanya               Isr    
+ 410 Rabotnicki Skopje             Mac    
+ 411 Milano Kumanovo               Mac    
+ 412 Naftan Navapolatsk            Bls    
+ 413 AA Gent                       Bel    
+ 414 Flamurtari Vlorë              Alb    
+ 415 MSK Zilina                    Svk    
+ 416 Dacia Chisinau                Mol    
+ 417 Tromsø IL                     Nor    
+ 418 FC Honka                      Fin    
+ 419 Bangor City                   Wal    
+ 420 FK Sevojno                    Ser    
+ 421 FBK Kaunas                    Lit    
+ 422 Metalurgs Liepaja             Lat    
+ 423 Dinamo Tbilisi                Geo    
+ 424 Metalurh Donetsk              Ukr    
+ 425 Tobil Qostanay                Kaz    
+ 426 Galatasaray SK                Tur    
+ 427 FC Paços de Ferreira          Por    
+ 428 Skonto Riga                   Lat    
+ 429 Derry City                    Ire    
+ 430 Petrovac                      Mng    
+ 431 Cherno more Varna             Bul    
+ 432 Iskra-Stal Ribnita            Mol    
+ 433 IF Elfsborg                   Swe    
+ 434 Qarabag Agdam                 Aze    
+ 435 SK Sigma Olomouc              Cze    
+ 436 Suduva Marijampole            Lit    
+ 437 SK Rapid Wien                 Aut    
+ 438 SK Sturm Graz                 Aut    
+ 439 AaB                           Den    
+ 440 Slavija Sarajevo              Bos    
+ 441 FC Basel                      Sui    
+ 442 FC Santa Coloma               And    
+ 443 Omonia Lefkosia               Cyp    
+ 444 HB                            Far    
+ 445 Steaua Bucuresti              Rom    
+ 446 Újpest FC                     Hun    
+ 447 FC Differdange 03             Lux    
+ 448 Rijeka                        Cro    
+ 449 Gorica                        Sln    
+ 450 Crvena zvezda                 Ser    
+ 451 Brøndby IF                    Den    
+ 452 Flora Tallinn                 Est    
+ 453 FK Sarajevo                   Bos    
+ 454 Falkirk                       Sco    
+ 455 FC Vaduz                      Lie    
+ 456 Juvenes                       SMa    
+ 457 NAC Breda                     Net    
+ 458 Gandzasar Kapan               Arm    
+ 459 St Patrick                    Ire    
+ 460 Larisa                        Gre    
+ 461 OB                            Den    
+ 462 Lech Poznan                   Pol    
+ 463 IFK Göteborg                  Swe    
+ 464 Hapoel Tel-Aviv               Isr    
+ 465 Interblock Ljubljana          Sln    
+ 466 Vålerenga                     Nor    
+ 467 Fulham                        Eng    
+ 468 APOP                          Cyp    
+ 469 Vojvodina                     Ser    
+ 470 FK Austria Wien               Aut    
+ 471 FC Slovan Liberec             Cze    
+ 472 Hajduk Split                  Cro    
+ 473 FC Vaslui                     Rom    
+ 474 MFK Kosice                    Svk    
+ 475 Hamburger SV                  Ger    
+ 476 Fenerbahçe SK                 Tur    
+ 477 Honvéd                        Hun    
+ 478 Lille OSC                     Fra    
+ 479 PSV                           Net    
+ 480 Krylya Sovetov Samara         Rus    
+ 481 Metalist Kharkiv              Ukr    
+ 482 SC Braga                      Por    
+ 483 Litex                         Bul    
+ 484 FK Teplice                    Cze    
+ 485 En Avant Guingamp             Fra    
+ 486 Trabzonspor                   Tur    
+ 487 Villarreal CF                 Esp    
+ 488 Heerenveen                    Net    
+ 489 Aston Villa                   Eng    
+ 490 CFR 1907 Cluj                 Rom    
+ 491 Hertha BSC                    Ger    
+ 492 Ajax                          Net    
+ 493 Vorskla Poltava               Ukr    
+ 494 Genoa                         Ita    
+ 495 Lazio                         Ita    
+ 496 KRC Genk                      Bel    
+ 497 Heart of Midlothian           Sco    
+ 498 Everton                       Eng    
+ 499 Amkar Perm                    Rus    
+ 500 Valencia CF                   Esp    
+

@@ -166,34 +166,24 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	}
 
 	private void insertMatchPairResult(MatchPairResult m, Integer competitionId, Phase p, String uri) throws SQLException {
-		
-	    	
-	    	Integer team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
-	    	if (team1Id == null) {
-	    		db.insertTeam(m.getTeam1(), m.getCountry1());
-	    		team1Id = db.findTeam(m.getTeam1(), m.getCountry1());
-	    	}
-	    		
-	    	Integer team2Id = db.findTeam(m.getTeam2(), m.getCountry2());
-	    	if (team2Id == null) {
-	    		db.insertTeam(m.getTeam2(), m.getCountry2());
-	    		team2Id = db.findTeam(m.getTeam2(), m.getCountry2());
-	    	}
-	    	
-	    	if (team1Id != null && team2Id != null ) {
 
-		    	db.insertMatchPair(team1Id, team2Id, 
-		    			m.getLeg1_1(), m.getLeg1_2(), m.getLeg2_1(), m.getLeg2_2(), 
-		    			m.getTotal_1(), m.getTotal_2(), 
-		    			competitionId, p.getName(), uri);
+		Integer team1Id = findTeamOrInsert(m.getTeam1(), m.getCountry1());
+		Integer team2Id = findTeamOrInsert(m.getTeam2(), m.getCountry2());
+	    	
+		if (team1Id != null && team2Id != null ) {
 
-	    	} else {
-	    		if (team1Id == null) 
-	    			getLogger().log(Level.FINE, "team not found: " + m.getTeam1()  + " " +  m.getCountry1() + " at " + uri);
-	    		if (team2Id == null) 
-	    			getLogger().log(Level.FINE, "team not found: " + m.getTeam2()  + " " +  m.getCountry2() + " at " + uri);
-	    		
-	    	}
+			db.insertMatchPair(team1Id, team2Id, 
+					m.getLeg1_1(), m.getLeg1_2(), m.getLeg2_1(), m.getLeg2_2(), 
+					m.getTotal_1(), m.getTotal_2(), 
+					competitionId, p.getName(), uri);
+
+		} else {
+			if (team1Id == null) 
+				getLogger().log(Level.FINE, "team not found: " + m.getTeam1()  + " " +  m.getCountry1() + " at " + uri);
+			if (team2Id == null) 
+				getLogger().log(Level.FINE, "team not found: " + m.getTeam2()  + " " +  m.getCountry2() + " at " + uri);
+
+		}
 	    	
 
 		
@@ -201,39 +191,62 @@ public class QualifyingResultDBWriterCasConsumer extends CasConsumer_ImplBase {
 	
 
 	private void insertMatchResult(MatchResult m, Integer competitionId, Phase p, String uri) throws SQLException {
-		
-    	
-    	Integer team1Id = db.findTeam(m.getTeam1(),null);
-    	if (team1Id == null) {
-    		db.insertTeam(m.getTeam1(), null);
-    		team1Id = db.findTeam(m.getTeam1());
-    	}
-    		
-    	Integer team2Id = db.findTeam(m.getTeam2());
-    	if (team2Id == null) {
-    		db.insertTeam(m.getTeam2(),null);
-    		team2Id = db.findTeam(m.getTeam2(),null);
-    	}
-    	
-    	if (team1Id != null && team2Id != null ) {
-    	
-    	db.insertMatch(team1Id, team2Id, 
-    			m.getResult1(), m.getResult2(),  
-    			m.getMid1(), m.getMid2(), 
-    			competitionId, p.getName(), uri);
-    	
-    	} else {
 
-    		if (team1Id == null) 
-    			getLogger().log(Level.FINE, "team not found: " + m.getTeam1()  + "(No country)  at " + uri);
-    		if (team2Id == null) 
-    			getLogger().log(Level.FINE, "team not found: " + m.getTeam2()  + "(No country) at " + uri);
 
-    	}
+		Integer team1Id = findTeamOrInsert(m.getTeam1(), null);
+		Integer team2Id = findTeamOrInsert(m.getTeam2(), null);
+
+		if (team1Id != null && team2Id != null ) {
+
+			db.insertMatch(team1Id, team2Id, 
+					m.getResult1(), m.getResult2(),  
+					m.getMid1(), m.getMid2(), 
+					competitionId, p.getName(), uri);
+
+		} else {
+
+			if (team1Id == null) 
+				getLogger().log(Level.FINE, "team not found: " + m.getTeam1()  + "(No country)  at " + uri);
+			if (team2Id == null) 
+				getLogger().log(Level.FINE, "team not found: " + m.getTeam2()  + "(No country) at " + uri);
+
+		}
+
+
+	}
 
 	
-}
-
+	private Integer findTeamOrInsert(String name, String country) throws SQLException {
+	
+		Integer teamId = null;
+		boolean hasCountry = false;
+		
+		// Try to find team with country
+		if (country != null) {
+			teamId = this.db.findTeamByNameAndCountry(name, country);
+			hasCountry = true;
+		}
+		
+		// Find team even if country is not the same
+		if (teamId == null) 
+			teamId = this.db.findTeam(name);
+		
+		// If the country is not found should be new, then insert whatever we have
+		if (teamId == null) {
+			db.insertTeam(name,country);
+			teamId = db.findTeamByNameAndCountry(name,country);
+			if (country != null) hasCountry = true; 
+		} 
+		
+		// If the team has the country valuem but it was nit found before then update
+		if (country != null && !hasCountry){
+			teamId = db.updateTeam(teamId,country);
+		}
+		
+		
+		
+		return teamId;
+	}
 	
 	
 	@Override

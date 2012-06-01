@@ -292,22 +292,15 @@ public class DatabaseProxy {
 		return false;
 	}
 	
-	
-	public Integer findTeam(String name, String country ) throws SQLException {
-		
+
+	public Integer findTeamByName(String name) throws SQLException {
+
 		Integer id = null;
-		        
+        
 		PreparedStatement stmt;
-		
-		if (country != null) {
-			stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=? AND country=?");
-			stmt.setString(1, name);
-			stmt.setString(2, country);			
-		} else {			
-			stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=? AND country IS NULL");
-			stmt.setString(1, name);			
-		}
-			
+
+		stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=?");
+		stmt.setString(1, name);			
 		
 		stmt.execute();
 		ResultSet resultSet = stmt.getResultSet();
@@ -315,6 +308,29 @@ public class DatabaseProxy {
 		if (resultSet != null && resultSet.next()) 			
 			id = resultSet.getInt(1);
 		
+		stmt.close();
+		return id ;
+
+		
+	}
+	
+	
+	public Integer findTeamByNameAndCountry(String name, String country ) throws SQLException {
+
+		Integer id = null;
+
+		PreparedStatement stmt;
+
+		stmt = con.prepareStatement("SELECT id FROM TEAM WHERE name=? AND country=?");
+		stmt.setString(1, name);
+		stmt.setString(2, country);						
+
+		stmt.execute();
+		ResultSet resultSet = stmt.getResultSet();
+
+		if (resultSet != null && resultSet.next()) 			
+			id = resultSet.getInt(1);
+
 		stmt.close();
 		return id ;
 	}
@@ -351,12 +367,33 @@ public class DatabaseProxy {
 		
 		stmt.execute();
 		
-		logger.log(Level.FINER, "inserted competition");
+		logger.log(Level.FINER, "inserted team");
 		stmt.close();
 		
 		return false;
 	}
 
+
+	/**
+	 * Updates the country of a team to reflect a previous name
+	 * 
+	 * @param teamId
+	 * @param country
+	 * @return
+	 */
+	public Integer updateTeam(Integer teamId, String country) throws SQLException{
+		
+		String update ="UPDATE TEAM SET COUNTRY = ? where id = ?";
+		PreparedStatement stmt = con.prepareStatement(update);
+		stmt.setString(1, truncate(country, MAX_COUNTRY_LENGTH));
+		stmt.setInt(2, teamId);
+	
+		stmt.execute();			
+		logger.log(Level.FINER, "updated team");
+		stmt.close();
+		
+		return null;
+	}
 
 	public boolean insertMatchPair(
 			Integer team1,  Integer team2,
@@ -498,10 +535,10 @@ public class DatabaseProxy {
 			db.findPhase(competitionId, "Semi-Finals");
 			
 			db.insertTeam("FC Barcelona", "Esp");
-			Integer teamId1 = db.findTeam("FC Barcelona", "Esp");
+			Integer teamId1 = db.findTeamByNameAndCountry("FC Barcelona", "Esp");
 			
 			db.insertTeam("Real Madrid FC", "Esp");
-			Integer teamId2 = db.findTeam("Real Madrid FC", "Esp");
+			Integer teamId2 = db.findTeamByNameAndCountry("Real Madrid FC", "Esp");
 			
 			db.insertMatchPair(teamId1, teamId2, 1, 1, 1, 1, 2, 2, competitionId, "Semi-Finals","");
 			

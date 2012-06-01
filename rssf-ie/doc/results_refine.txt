@@ -1,12 +1,4 @@
-Versión ij 10.8
-ij> connect 'jdbc:derby:RssfResultsDB;';
-ij> SELECT c.name, c.season, phase, t1.name team1, t2.name team2, leg1_1,leg1_2,leg2_1,leg2_2,total1,total2
-FROM ((MATCH_PAIR m JOIN  TEAM t1 ON m.team1 = t1.id) 
-JOIN TEAM t2 ON m.team2 = t2.id)
-JOIN COMPETITION c ON c.id = m.competition
-ORDER BY c.season, c.name;
 NAME                                              |SEASON    |PHASE                                             |TEAM1                                             |TEAM2                                             |LEG1_1     |LEG1_2     |LEG2_1     |LEG2_2     |TOTAL1     |TOTAL2     
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Champions' Cup                                    |1955-56   |Semi-Finals                                       |Stade de Reims                                    |Hibernian (Edinburgh)                             |2          |0          |1          |0          |3          |0          
 Champions' Cup                                    |1955-56   |Semi-Finals                                       |Real Madrid                                       |Milan AC                                          |4          |2          |1          |2          |5          |4          
 Champions' Cup                                    |1955-56   |Quarter-Finals                                    |Stade de Reims                                    |Vörös Lobogó (Budapest)                           |4          |2          |4          |4          |8          |6          
